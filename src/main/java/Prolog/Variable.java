@@ -1,13 +1,18 @@
 package Prolog;
 
+
 import Prolog.Unification.UnificationClause;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
-public class Atom extends Term{
+public class Variable extends Term{
 
-    public Atom(String name) {
+
+    PrologEnv env;
+
+    public Variable(String name, PrologEnv env) {
         this.name = name;
+        this.env = env;
     }
 
     @Override
@@ -17,11 +22,10 @@ public class Atom extends Term{
 
     @Override
     public UnificationClause[] unify(Term other, Unifier env) throws UnificationFailureException {
-        if(!(other instanceof Atom)) {
-            throw new UnificationFailureException();
-        } else if(other.getName() == getName()) {
-            throw new UnificationFailureException();
+        if(env.isVarFree(name)) {
+            env.RegisterVar(name, other);
+            return new UnificationClause[0];
         }
-        return new UnificationClause[0];
+        throw new UnificationFailureException();
     }
 }

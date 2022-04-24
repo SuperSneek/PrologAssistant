@@ -1,5 +1,9 @@
 package Prolog;
 
+import Prolog.Unification.UnificationClause;
+import Prolog.Unification.UnificationFailureException;
+import Prolog.Unification.Unifier;
+
 public class Rule extends Term {
 
     Term left;
@@ -17,7 +21,7 @@ public class Rule extends Term {
     }
 
     @Override
-    public boolean hasSolution() {
-        return right.hasSolution();
+    public UnificationClause[] unify(Term other, Unifier env) throws UnificationFailureException {
+        return new UnificationClause[0];
     }
 }

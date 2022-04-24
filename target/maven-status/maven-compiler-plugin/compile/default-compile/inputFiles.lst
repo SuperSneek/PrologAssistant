@@ -1,3 +1,12 @@
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Term.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Compound.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Atom.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/PList.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Unification/Unifier.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/PrologUtil.java
 /home/jonas/IdeaProjects/Prolog Computer/src/main/java/PrologConnector.java
 /home/jonas/IdeaProjects/Prolog Computer/src/main/java/VoiceInterface.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/PrologEnv.java
 /home/jonas/IdeaProjects/Prolog Computer/src/main/java/CommandLineInterface.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Rule.java
+/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Variable.java

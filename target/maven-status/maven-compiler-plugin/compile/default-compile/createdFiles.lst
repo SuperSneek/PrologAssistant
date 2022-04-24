@@ -1,2 +1,11 @@
+Prolog/PList.class
+Prolog/Term.class
+Prolog/PrologEnv.class
 CommandLineInterface.class
+Prolog/Unification/Unifier.class
+Prolog/Rule.class
+Prolog/Variable.class
+Prolog/Compound.class
+Prolog/Atom.class
+VoiceInterface.class
 PrologConnector.class

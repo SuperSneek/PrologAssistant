@@ -20,19 +20,7 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <name>JitPack Repository</name>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
     <dependencies>
-        <dependency>
-            <groupId>com.github.SWI-Prolog</groupId>
-            <artifactId>packages-jpl</artifactId>
-            <version>V8.3.2</version>	<!-- version 7.6.1 of JPL -->
-        </dependency>
 
         <dependency>
             <groupId>de.sciss</groupId>
@@ -44,6 +32,12 @@
             <groupId>net.sf.phat</groupId>
             <artifactId>sphinx4-core</artifactId>
             <version>5prealpha</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
