@@ -32,7 +32,13 @@ public class Query implements Iterator<Map<String, Term>> {
         Map<String, Term> vars = new HashMap<String, Term>();
         Unifier u = new Unifier();
         if(pattern instanceof Rule) {
-            vars.putAll(env.Query(((Rule) pattern).right).next());
+            Query answer = env.Query(((Rule) pattern).right);
+            Map<String, Term> var = answer.next();
+            if(var != null) {
+                vars.putAll(var);
+            } else {
+                throw new UnificationFailureException();
+            }
         }
         return u.Unify(query, (Term) pattern, vars);
     }

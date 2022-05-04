@@ -13,7 +13,7 @@ public class CommandLineInterface {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
         boolean running = true;
         while (running) {
             String input = scanner.next();
