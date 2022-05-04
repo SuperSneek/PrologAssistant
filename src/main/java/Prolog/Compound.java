@@ -4,7 +4,9 @@ import Prolog.Unification.UnificationClause;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Compound extends Term {
 
@@ -21,14 +23,14 @@ public class Compound extends Term {
     }
 
     @Override
-    public UnificationClause[] unify(Term other, Unifier env) throws UnificationFailureException {
-        if(other instanceof Compound) {
-            Compound otherC = (Compound) other;
+    public List<UnificationClause> unify(Term other, Unifier env) throws UnificationFailureException {
+        if(other instanceof Compound otherC) {
             if(otherC.values.length == values.length) {
-                UnificationClause[] clauses = new UnificationClause[values.length];
+                ArrayList<UnificationClause> out = new ArrayList<UnificationClause>();
                 for (int i = 0; i < values.length; i++) {
-                    clauses[i] = new UnificationClause(otherC.values[i], values[i]);
+                    out.add(new UnificationClause(otherC.values[i], values[i]));
                 }
+                return out;
             }
         }
         throw new UnificationFailureException();

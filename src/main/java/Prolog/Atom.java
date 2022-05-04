@@ -4,6 +4,11 @@ import Prolog.Unification.UnificationClause;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
 public class Atom extends Term{
 
     public Atom(String name) {
@@ -16,12 +21,12 @@ public class Atom extends Term{
     }
 
     @Override
-    public UnificationClause[] unify(Term other, Unifier env) throws UnificationFailureException {
+    public List<UnificationClause> unify(Term other, Unifier env) throws UnificationFailureException {
         if(!(other instanceof Atom)) {
             throw new UnificationFailureException();
-        } else if(other.getName() == getName()) {
+        } else if(!other.getName().equals(getName())) {
             throw new UnificationFailureException();
         }
-        return new UnificationClause[0];
+        return new ArrayList<>();
     }
 }

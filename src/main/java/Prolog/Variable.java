@@ -5,6 +5,10 @@ import Prolog.Unification.UnificationClause;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class Variable extends Term{
 
 
@@ -21,11 +25,9 @@ public class Variable extends Term{
     }
 
     @Override
-    public UnificationClause[] unify(Term other, Unifier env) throws UnificationFailureException {
-        if(env.isVarFree(name)) {
-            env.RegisterVar(name, other);
-            return new UnificationClause[0];
-        }
-        throw new UnificationFailureException();
+    public List<UnificationClause> unify(Term other, Unifier env) throws UnificationFailureException {
+        ArrayList<UnificationClause> out = new ArrayList<UnificationClause>();
+        out.add(new UnificationClause(this, other));
+        return out;
     }
 }

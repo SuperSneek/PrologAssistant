@@ -1,5 +1,7 @@
 import Prolog.PrologEnv;
+import Prolog.Query;
 import Prolog.Term;
+import Prolog.Unification.UnificationFailureException;
 
 import java.io.Console;
 import java.io.InputStream;
@@ -15,12 +17,27 @@ public class CommandLineInterface {
         boolean running = true;
         while (running) {
             String input = scanner.next();
+            if(input.startsWith("?")) {
+                try {
+                    Query q  = env.Query(Term.textToTerm(input.substring(1), env));
+                    while(q.hasNext()) {
+                        System.out.println("true: " + q.next());
+                        String s = scanner.next();
+                        if(!s.equals(";")) {
+                            break;
+                        }
+                    }
+                } catch (UnificationFailureException e) {
+                    System.out.println("false");
+                }
+                continue;
+            }
             try {
-                System.out.println(Term.textToTerm(input, env));
+                env.LoadPattern(input);
+                System.out.println(env);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-            running = false;
         }
     }
 
