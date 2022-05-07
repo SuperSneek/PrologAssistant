@@ -80,5 +80,8 @@ public abstract class Term extends PlPattern {
         }
         throw new IllegalArgumentException("Not a Term");
     }
-
+    @Override
+    public Map<String, Term> findSolution() {
+        return null;
+    }
 }

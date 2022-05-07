@@ -78,7 +78,6 @@ public class PList extends Term{
                         }
                     }
                 };
-
         }
     }
 

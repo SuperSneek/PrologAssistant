@@ -36,4 +36,9 @@ public class Rule extends PlPattern {
             throw new UnificationFailureException();
         }
     }
+
+    @Override
+    public Map<String, Term> findSolution() {
+        return null;
+    }
 }

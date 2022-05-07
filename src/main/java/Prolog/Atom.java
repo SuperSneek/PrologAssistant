@@ -21,7 +21,11 @@ public class Atom extends Term{
     }
 
     @Override
+<<<<<<< HEAD
     public List<UnificationClause> generateClauses(Term other, Unifier env) throws UnificationFailureException {
+=======
+    public List<UnificationClause> unify(Term other, Unifier env) throws UnificationFailureException {
+>>>>>>> origin/master
         if(!(other instanceof Atom)) {
             throw new UnificationFailureException();
         } else if(!other.getName().equals(getName())) {
