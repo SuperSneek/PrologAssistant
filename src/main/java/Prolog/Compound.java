@@ -1,11 +1,14 @@
 package Prolog;
 
-import Prolog.Unification.UnificationClause;
+import Prolog.Unification.UnificationClauses.ClauseList;
+import Prolog.Unification.UnificationClauses.UnificationClause;
+import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class Compound extends Term {
@@ -23,14 +26,14 @@ public class Compound extends Term {
     }
 
     @Override
-    public List<UnificationClause> generateClauses(Term other, Unifier env) throws UnificationFailureException {
+    public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
         if(other instanceof Compound otherC) {
             if(otherC.values.length == values.length) {
                 ArrayList<UnificationClause> out = new ArrayList<UnificationClause>();
                 for (int i = 0; i < values.length; i++) {
                     out.add(new UnificationClause(otherC.values[i], values[i]));
                 }
-                return out;
+                return new ClauseList(out);
             }
         }
         throw new UnificationFailureException();

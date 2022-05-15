@@ -1,6 +1,7 @@
 package Prolog.Unification;
 
 import Prolog.Term;
+import Prolog.Unification.UnificationClauses.UnificationClause;
 import lombok.AllArgsConstructor;
 
 import java.util.List;

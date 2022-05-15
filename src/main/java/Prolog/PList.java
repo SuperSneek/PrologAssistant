@@ -1,6 +1,7 @@
 package Prolog;
 
-import Prolog.Unification.UnificationClause;
+import Prolog.Unification.UnificationClauses.UnificationClause;
+import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
@@ -51,33 +52,13 @@ public class PList extends Term{
     }
 
     @Override
-    public Iterator<List<UnificationClause>> generateClauses(Term other, Unifier env) throws UnificationFailureException {
+    public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
         if(!(other instanceof PList otherL)) {
             throw new UnificationFailureException();
         } else {
-                return new Iterator<List<UnificationClause>>() {
+            if(otherL.item instanceof Variable) {
 
-                    PList otherL;
-                    Iterator<List<UnificationClause>> currentClauses;
-
-                    @Override
-                    public boolean hasNext() {
-                        return otherL.next != null || currentClauses.hasNext();
-                    }
-
-                    @Override
-                    public List<UnificationClause> next() {
-                        if(!hasNext()) {
-                            return null;
-                        }
-                        try {
-                            otherL.item
-                            return item.generateClauses(otherL.item, env).next().addAll(next.generateClauses(otherL.next, env).next());
-                        } catch (UnificationFailureException e) {
-                            return null;
-                        }
-                    }
-                };
+            }
         }
     }
 

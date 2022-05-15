@@ -1,12 +1,8 @@
 package Prolog;
 
-import Prolog.Unification.UnificationClause;
 import Prolog.Unification.UnificationFailureException;
-import Prolog.Unification.Unifier;
 
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 public class Rule extends PlPattern {
 
@@ -35,10 +31,5 @@ public class Rule extends PlPattern {
         } else {
             throw new UnificationFailureException();
         }
-    }
-
-    @Override
-    public Map<String, Term> findSolution() {
-        return null;
     }
 }

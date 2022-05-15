@@ -1,4 +1,4 @@
-package Prolog.Unification;
+package Prolog.Unification.UnificationClauses;
 
 import Prolog.Term;
 import lombok.AllArgsConstructor;

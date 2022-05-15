@@ -1,6 +1,8 @@
 package Prolog.Unification;
 
 import Prolog.*;
+import Prolog.Unification.UnificationClauses.UnificationClause;
+import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 
 import java.util.*;
 
@@ -9,11 +11,11 @@ public class Unifier {
     Set<String> vars = new HashSet<>();
 
     public Map<String, Term> Unify(Term X, Term Y, Map<String, Term> vars) throws UnificationFailureException {
-        List<UnificationClause> clauses = X.generateClauses(Y, this);
+        UnificationClauseCarrier clauses = X.generateClauses(Y, this);
         return RecursiveUnify(clauses);
     }
 
-    private Map<String, Term> RecursiveUnify(List<UnificationClause> clauses) throws UnificationFailureException {
+    private Map<String, Term> RecursiveUnify(UnificationClauseCarrier clauses) throws UnificationFailureException {
         if(clauses.size() == 0) {
             return new HashMap<>();
         }

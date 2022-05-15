@@ -1,16 +1,16 @@
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Term.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Compound.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/PList.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Unification/Unifier.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Unification/Substitution.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/PrologConnector.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/VoiceInterface.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/PrologEnv.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/CommandLineInterface.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Unification/UnificationFailureException.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Rule.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Atom.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/PlPattern.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Unification/UnificationClause.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Query.java
-/home/jonas/IdeaProjects/Prolog Computer/src/main/java/Prolog/Variable.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\PrologEnv.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Variable.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\PlPattern.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Query.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Unification\UnificationFailureException.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\PrologConnector.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Rule.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Unification\UnificationClause.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Unification\Unifier.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Atom.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\VoiceInterface.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\CommandLineInterface.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Unification\Substitution.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Compound.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\PList.java
+C:\Users\Jonas\Documents\Uni\PrologAssistant\src\main\java\Prolog\Term.java

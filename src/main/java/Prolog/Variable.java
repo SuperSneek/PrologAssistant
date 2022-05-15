@@ -1,13 +1,14 @@
 package Prolog;
 
 
-import Prolog.Unification.UnificationClause;
+import Prolog.Unification.UnificationClauses.SingleClause;
+import Prolog.Unification.UnificationClauses.UnificationClause;
+import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class Variable extends Term{
 
@@ -25,9 +26,7 @@ public class Variable extends Term{
     }
 
     @Override
-    public List<UnificationClause> generateClauses(Term other, Unifier env) throws UnificationFailureException {
-        ArrayList<UnificationClause> out = new ArrayList<UnificationClause>();
-        out.add(new UnificationClause(this, other));
-        return out;
+    public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
+        return new SingleClause(new UnificationClause(this, other));
     }
 }
