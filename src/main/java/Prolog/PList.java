@@ -11,8 +11,8 @@ import java.util.Stack;
 
 public class PList extends Term{
 
-    protected PList next;
-    protected Term item;
+    public PList next;
+    public Term item;
 
     public PList(Term term, PList next) {
         this.name = "List";

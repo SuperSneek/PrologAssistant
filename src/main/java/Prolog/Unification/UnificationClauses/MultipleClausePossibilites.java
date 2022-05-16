@@ -5,6 +5,7 @@ import Prolog.Unification.Unifier;
 import Prolog.Variable;
 import lombok.SneakyThrows;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class MultipleClausePossibilites extends UnificationClauseCarrier {
@@ -16,6 +17,9 @@ public class MultipleClausePossibilites extends UnificationClauseCarrier {
     Variable head;
     PList tail;
 
+    //Initialized as null, for recursive list reexecution
+    UnificationClauseCarrier current = null;
+
     @Override
     public boolean hasNext() {
         return true;
@@ -24,7 +28,13 @@ public class MultipleClausePossibilites extends UnificationClauseCarrier {
     @SneakyThrows
     @Override
     public List<UnificationClause> next() {
-        return rightList.generateClauses(tail);
+        LinkedList<UnificationClause> out = new LinkedList<>();
+        out.add((new UnificationClause(head, new PList(rightList.item, leftList))));
+        new SingleClause(new UnificationClause(tail, rightList.next)));
+    }
+
+    private UnificationClauseCarrier generateNextClauses() {
+
     }
 
 }

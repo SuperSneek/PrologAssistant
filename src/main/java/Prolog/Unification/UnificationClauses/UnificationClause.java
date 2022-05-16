@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class UnificationClause {
-    Term left;
-    Term right;
+    public Term left;
+    public Term right;
 
 }

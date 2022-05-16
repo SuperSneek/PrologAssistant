@@ -6,16 +6,17 @@ import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 
 import java.util.*;
 
-public class Unifier {
+public class Unifier implements Iterator<Map<String, Term>> {
 
     Set<String> vars = new HashSet<>();
 
-    public Map<String, Term> Unify(Term X, Term Y, Map<String, Term> vars) throws UnificationFailureException {
-        UnificationClauseCarrier clauses = X.generateClauses(Y, this);
-        return RecursiveUnify(clauses);
+    private final UnificationClauseCarrier carrier;
+
+    public Unifier(Term X, Term Y, Map<String, Term> vars) throws UnificationFailureException {
+        carrier = X.generateClauses(Y);
     }
 
-    private Map<String, Term> RecursiveUnify(UnificationClauseCarrier clauses) throws UnificationFailureException {
+    private Map<String, Term> RecursiveUnify(List<UnificationClause> clauses) throws UnificationFailureException {
         if(clauses.size() == 0) {
             return new HashMap<>();
         }
@@ -39,5 +40,19 @@ public class Unifier {
             return out;
         }
         throw new UnificationFailureException();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return carrier.hasNext();
+    }
+
+    @Override
+    public Map<String, Term> next() {
+        try {
+            return RecursiveUnify(carrier.next());
+        } catch (UnificationFailureException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
