@@ -19,7 +19,7 @@ public class CommandLineInterface {
             String input = scanner.next();
             if(input.startsWith("?")) {
                 try {
-                    Query q  = env.Query(Term.textToTerm(input.substring(1), env));
+                    Query q  = env.Query(Term.textToTerm(input.substring(1)));
                     while(q.hasNext()) {
                         System.out.println("true: " + q.next());
                         String s = scanner.next();

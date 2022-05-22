@@ -24,4 +24,12 @@ public class Atom extends Term{
     public UnificationClauseCarrier generateClauses(Term other) {
         return new SingleClause(new UnificationClause(this, other));
     }
+
+    @Override
+    public boolean equals(Term other) {
+        if(other instanceof Atom a) {
+            return a.name.equals(name);
+        }
+        return false;
+    }
 }

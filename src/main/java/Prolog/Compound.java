@@ -38,4 +38,21 @@ public class Compound extends Term {
         }
         throw new UnificationFailureException();
     }
+
+    @Override
+    public boolean equals(Term other) {
+        boolean out = true;
+        if(other instanceof Compound a) {
+            out = a.name.equals(name);
+            if(a.values.length != values.length) {
+                return false;
+            }
+            for (int i = 0; i < values.length; i++) {
+                if(!values[i].equals(a.values[i])) {
+                    return false;
+                }
+            }
+        }
+        return out;
+    }
 }

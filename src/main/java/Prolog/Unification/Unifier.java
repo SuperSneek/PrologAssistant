@@ -16,7 +16,7 @@ public class Unifier implements Iterator<Map<String, Term>> {
         carrier = X.generateClauses(Y);
     }
 
-    private Map<String, Term> RecursiveUnify(List<UnificationClause> clauses) throws UnificationFailureException {
+    public Map<String, Term> RecursiveUnify(List<UnificationClause> clauses) throws UnificationFailureException {
         if(clauses.size() == 0) {
             return new HashMap<>();
         }
@@ -24,7 +24,7 @@ public class Unifier implements Iterator<Map<String, Term>> {
         List<UnificationClause> tail = clauses.subList(1,clauses.size());
         //Splitting functors into multiple clauses is already done in line Unify(...)
         if(head.left.equals(head.right)) {
-            RecursiveUnify(tail);
+           return RecursiveUnify(tail);
         } else if(head.left instanceof Variable && !vars.contains(head.left.getName())) {
             vars.add(head.left.getName());
             Substitution sub = new Substitution(head.left, head.right);

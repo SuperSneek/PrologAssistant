@@ -26,7 +26,7 @@ public class PrologEnv extends Thread {
         Stack<Term> s = new Stack<>();
         s.addAll(Arrays.stream(words).map(Atom::new).toList());
         PList l = PList.fromQueue(s);
-        return Query(new Compound("pattern", new Term[]{l, new Variable("RESULT", this)}));
+        return Query(new Compound("pattern", new Term[]{l, new Variable("RESULT")}));
     }
 
     public Query Query(Term query) throws UnificationFailureException {

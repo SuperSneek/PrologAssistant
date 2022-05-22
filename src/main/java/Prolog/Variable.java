@@ -13,11 +13,9 @@ import java.util.List;
 public class Variable extends Term{
 
 
-    PrologEnv env;
 
-    public Variable(String name, PrologEnv env) {
+    public Variable(String name) {
         this.name = name;
-        this.env = env;
     }
 
     @Override
@@ -28,5 +26,13 @@ public class Variable extends Term{
     @Override
     public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
         return new SingleClause(new UnificationClause(this, other));
+    }
+
+    @Override
+    public boolean equals(Term o) {
+        if(o instanceof Variable l) {
+            return l.name.equals(name);
+        }
+        return false;
     }
 }

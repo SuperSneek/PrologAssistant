@@ -6,7 +6,7 @@ import java.util.List;
 public abstract class UnificationClauseCarrier implements Iterator<List<UnificationClause>> {
 
     public boolean hasNext() {
-        return false;
+        return true;
     }
 
 
