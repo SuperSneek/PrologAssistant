@@ -13,7 +13,7 @@ public abstract class PlPattern {
     static Pattern rule = Pattern.compile("(.*):-(.*)");
 
     public boolean matches(Term match) {
-        return name.equals(match.getName());
+        return name.equals(match.getName()) || (match instanceof Variable);
     }
 
     public abstract Map<String, Term> unify(Term queryTerm, PrologEnv env, Map<String, Term> vars) throws UnificationFailureException;

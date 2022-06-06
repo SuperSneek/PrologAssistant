@@ -22,7 +22,7 @@ public class Atom extends Term{
 
     @Override
     public UnificationClauseCarrier generateClauses(Term other) {
-        return new SingleClause(new UnificationClause(this, other));
+        return new SingleClause(this, other);
     }
 
     @Override

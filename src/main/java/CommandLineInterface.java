@@ -27,6 +27,7 @@ public class CommandLineInterface {
                             break;
                         }
                     }
+                    System.out.println("false");
                 } catch (UnificationFailureException e) {
                     System.out.println("false");
                 }

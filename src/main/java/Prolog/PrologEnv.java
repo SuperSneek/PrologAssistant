@@ -34,7 +34,7 @@ public class PrologEnv extends Thread {
     }
 
     public Iterator<PlPattern> findMatchingPatterns(Term match) {
-        return loadedPatterns.stream().filter(x -> x.matches(match)).iterator();
+        return loadedPatterns.stream().filter(x -> (x.matches(match))).iterator();
     }
 
     @Override

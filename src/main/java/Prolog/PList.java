@@ -38,7 +38,7 @@ public class PList extends Term {
         if(next == null) {
             return false;
         }
-        return next.item == null;
+        return next.item != null;
     }
 
     public Term head() {

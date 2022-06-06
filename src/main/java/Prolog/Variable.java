@@ -25,7 +25,12 @@ public class Variable extends Term{
 
     @Override
     public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
-        return new SingleClause(new UnificationClause(this, other));
+        return new SingleClause(this, other);
+    }
+
+    @Override
+    public boolean matches(Term other) {
+        return true;
     }
 
     @Override

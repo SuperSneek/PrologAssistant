@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import java.util.LinkedList;
 import java.util.List;
 
-@AllArgsConstructor
 public class SingleClause extends UnificationClauseCarrier {
 
     private final UnificationClause clause;
@@ -14,9 +13,15 @@ public class SingleClause extends UnificationClauseCarrier {
     public SingleClause(Term left, Term right) {
         clause = new UnificationClause(left, right);
     }
+    private boolean returned = false;
+
+    @Override
+    public boolean hasNext() {
+        return !returned;
+    }
 
     @Override
     public List<UnificationClause> next() {
-        return List.of(clause);
+        return returned ? null : List.of(clause);
     }
 }
