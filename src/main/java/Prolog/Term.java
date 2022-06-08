@@ -23,7 +23,7 @@ public abstract class Term extends PlPattern {
 
 
     static Pattern compound = Pattern.compile("([a-z]+)\\(((?:.+,?)+)\\)");
-    static Pattern list = Pattern.compile("(\\[(?:[a-zA-Z]+,?)*\\])|(\\[(?:[A-Z]\\|[A-Z])\\])");
+    static Pattern list = Pattern.compile("\\[([^,]+,?)*\\]");
     static Pattern var = Pattern.compile("[A-Z]+");
     static Pattern atom = Pattern.compile("[a-z]+");
 
@@ -68,23 +68,14 @@ public abstract class Term extends PlPattern {
     private static PList matchList(Matcher listMatcher, String input) {
         String content = input.replaceAll("\\[?\\]?", "");
         String[] items;
-        if(input.contains("|")) {
-            items = content.split("\\|");
-            if(items.length != 2) {
-                throw new IllegalArgumentException("Not a Term");
-            } else {
-                return new PList(Term.textToTerm(items[0]), new PList(Term.textToTerm(items[1])));
-            }
-        } else{
-            items = content.split(",");
-        }
+        items = content.split(",");
         if(content.length() == 0) {
             return new PList(null);
         }
         PList list = new PList(Term.textToTerm(items[0]));
         PList acc = list;
         for (int i = 1; i < items.length; i++) {
-            acc.next = new PList(Term.textToTerm(items[i]), null);
+            acc.next = new PList(Term.textToTerm(items[i]));
             acc = (PList) acc.next;
         }
         return list;

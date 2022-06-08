@@ -9,6 +9,7 @@ import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Variable;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +28,14 @@ public class ListReexecution extends UnificationClauseCarrier {
     }
 
     public void parse() throws UnificationFailureException {
-        while(leftRemaining.hasNext() && rightRemaining.hasNext()) {
+        while(!leftRemaining.isEmpty() || !rightRemaining.isEmpty()) {
             if(leftRemaining.item instanceof Variable var) {
                 leftRemaining = leftRemaining.next;
                 rightRemaining = parseVariables(rightRemaining, leftRemaining.item, var);
-            } else {
+            } else if(rightRemaining.item instanceof Variable var) {
+                rightRemaining = rightRemaining.next;
+                leftRemaining = parseVariables(leftRemaining, rightRemaining.item, var);
+            }else {
                 parseOtherTerms();
             }
         }
@@ -50,14 +54,15 @@ public class ListReexecution extends UnificationClauseCarrier {
      */
     private PList parseVariables(PList termList, Term listEnd, Variable variable) {
         PList list = new PList(null);
-        do {
+        while(!termList.isEmpty()) {
             list = new PList(termList.item, list);
+            termList = termList.next;
             if(list.item.equals(listEnd)) {
                 break;
             }
-        } while ((termList.hasNext()));
-        domainList.add(new VariableDomain(list, variable));
-        return list;
+        }
+        domainList.add(new VariableDomain(list.reverse(), variable));
+        return termList;
     }
 
     private void parseOtherTerms() {

@@ -24,7 +24,9 @@ public class PList extends Term {
     public PList(Term term) {
         this.name = "List";
         this.item = term;
-        this.next = null;
+        if(term != null) {
+            this.next = new PList(null);
+        }
     }
 
     public static PList fromQueue(Stack<Term> terms) {
@@ -78,5 +80,19 @@ public class PList extends Term {
             return out;
         }
        return false;
+    }
+
+    public boolean isEmpty() {
+        return item == null;
+    }
+
+    public PList reverse() {
+        PList out = new PList(null);
+        PList acc = this;
+        while(!acc.isEmpty()) {
+            out = new PList(acc.item, out);
+            acc = acc.next;
+        }
+        return out;
     }
 }

@@ -18,7 +18,7 @@ public class VariableDomain extends UnificationClauseCarrier {
 
     @Override
     public boolean hasNext() {
-        return false;
+        return true;
     }
 
     @Override

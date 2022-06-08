@@ -58,6 +58,21 @@ class UnifierTest {
         }
     }
 
+    @Test
+    void testUnifyListWithVariables() {
+        mgu.put("X", Term.textToTerm("[dog,cat,mouse]"));
+        mgu.put("Y", Term.textToTerm("[]"));
+        try {
+            Unifier u = new Unifier(Term.textToTerm("[dog,cat,mouse]"), Term.textToTerm("[X,Y]"), new HashMap<>());
+            assertTrue(u.hasNext());
+            Map<String, Term> mgu2 = u.next();
+            assertTrue(collectionEqual(mgu.values(), mgu2.values()));
+            assertTrue(collectionEqual(mgu.keySet(), mgu2.keySet()));
+        } catch (UnificationFailureException e) {
+            fail();
+        }
+    }
+
     private <Term> boolean collectionEqual(Collection<Term> a, Collection<Term> b) {
         for (Term item:
              a) {
