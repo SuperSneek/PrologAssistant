@@ -24,6 +24,11 @@ class TermTest {
     }
 
     @Test
+    public void TestMatchCompoundList() {
+        Term c = (new Compound("test", new Term[] {Term.textToTerm("[a,b,c]")}));
+        assertTrue(c.equals(Term.textToTerm("test([a,b,c])")));
+    }
+    @Test
     public void TestMatchLists() {
         Term c = (new PList(new Atom("amogus"), new PList(new Atom("testatom"), new PList(null))));
         assertTrue(c.equals(Term.textToTerm("[amogus,testatom]")));

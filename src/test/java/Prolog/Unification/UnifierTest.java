@@ -73,6 +73,47 @@ class UnifierTest {
         }
     }
 
+    @Test
+    void testUnifyWithVariablesInCompound() {
+        mgu.put("X", Term.textToTerm("[dog,cat,mouse]"));
+        mgu.put("Y", Term.textToTerm("[]"));
+        try {
+            Unifier u = new Unifier(Term.textToTerm("test([dog,cat,mouse])"), Term.textToTerm("test([X,Y])"), new HashMap<>());
+            assertTrue(u.hasNext());
+            Map<String, Term> mgu2 = u.next();
+            assertTrue(collectionEqual(mgu.values(), mgu2.values()));
+            assertTrue(collectionEqual(mgu.keySet(), mgu2.keySet()));
+        } catch (UnificationFailureException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testEmbeddedVariable() {
+        mgu.put("X", Term.textToTerm("[b]"));
+        PList test = (PList) Term.textToTerm("[a,b,c]");
+        Term out = Term.textToTerm("[a,X,c]");
+        try {
+            Unifier u = new Unifier(test, out, new HashMap<>());
+            assertTrue(u.hasNext());
+            Map<String, Term> mgu2 = u.next();
+            assertTrue(collectionEqual(mgu.values(), mgu2.values()));
+            assertTrue(collectionEqual(mgu.keySet(), mgu2.keySet()));
+        } catch (UnificationFailureException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testVariableCarryOver() throws UnificationFailureException {
+        PList test = (PList) Term.textToTerm("[a,X,c]");
+        Term out = Term.textToTerm("X");
+        Unifier u = new Unifier(test, out, new HashMap<>());
+        assertFalse(u.hasNext());
+        assertNull(u.next());
+    }
+
+
     private <Term> boolean collectionEqual(Collection<Term> a, Collection<Term> b) {
         for (Term item:
              a) {

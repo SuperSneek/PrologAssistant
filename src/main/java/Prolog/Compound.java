@@ -55,4 +55,15 @@ public class Compound extends Term {
         }
         return out;
     }
+    
+    @Override
+    public boolean contains(Term c) {
+        for (Term t:
+             values) {
+            if(t.equals(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

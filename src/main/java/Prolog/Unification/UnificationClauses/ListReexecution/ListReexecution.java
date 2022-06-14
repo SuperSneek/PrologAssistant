@@ -13,9 +13,19 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author jonas lewandrowski
+ * This class takes two lists and creates an iterator which produces ALL the different permutations of variables that
+ * might unify those two lists
+ */
 public class ListReexecution extends UnificationClauseCarrier {
 
-    List<UnificationClauseCarrier> domainList = new ArrayList<>();
+
+    /**
+     * This contains the "domains" in which unification occurs - basically parts of the two lists
+     * that are delimited by common (immutable) elements
+     */
+    private List<UnificationClauseCarrier> domainList = new ArrayList<>();
     private CompositeClauseCarrier current;
 
     private PList leftRemaining;
@@ -39,7 +49,7 @@ public class ListReexecution extends UnificationClauseCarrier {
                 parseOtherTerms();
             }
         }
-        if(leftRemaining.hasNext() || rightRemaining.hasNext()) {
+        if(!leftRemaining.isEmpty() || !rightRemaining.isEmpty()) {
             throw new UnificationFailureException();
         }
         current = new CompositeClauseCarrier(domainList);
@@ -55,25 +65,25 @@ public class ListReexecution extends UnificationClauseCarrier {
     private PList parseVariables(PList termList, Term listEnd, Variable variable) {
         PList list = new PList(null);
         while(!termList.isEmpty()) {
-            list = new PList(termList.item, list);
-            termList = termList.next;
-            if(list.item.equals(listEnd)) {
+            if(termList.item.equals(listEnd)) {
                 break;
             }
+            list = new PList(termList.item, list);
+            termList = termList.next;
         }
-        domainList.add(new VariableDomain(list.reverse(), variable));
+        domainList.add(new VariableDomain(variable, list.reverse()));
         return termList;
     }
 
     private void parseOtherTerms() {
         List<UnificationClause> clauses = new ArrayList<>();
-        do {
+        while(!leftRemaining.isEmpty() && !rightRemaining.isEmpty()
+                && !(leftRemaining.item instanceof Variable) &&
+                !(rightRemaining.item instanceof Variable)) {
             clauses.add(new UnificationClause(leftRemaining.item, rightRemaining.item));
             leftRemaining = leftRemaining.next;
             rightRemaining = rightRemaining.next;
-        } while(leftRemaining.hasNext() && rightRemaining.hasNext()
-                && !(leftRemaining.item instanceof Variable) &&
-                !(rightRemaining.item instanceof Variable));
+        }
         domainList.add(new ClauseList(clauses));
     }
 

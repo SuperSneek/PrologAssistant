@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.PListTest" time="0" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.PListTest" time="0.001" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/home/jonas/.jdks/openjdk-18.0.1.1/lib"/>
-    <property name="sun.java.command" value="/home/jonas/IdeaProjects/PrologAssistant/target/surefire/surefirebooter4699580683278308695.jar /home/jonas/IdeaProjects/PrologAssistant/target/surefire 2022-06-08T18-33-01_920-jvmRun1 surefire12326668078495593458tmp surefire_016143432679926653565tmp"/>
+    <property name="sun.java.command" value="/home/jonas/IdeaProjects/PrologAssistant/target/surefire/surefirebooter12795344730771020358.jar /home/jonas/IdeaProjects/PrologAssistant/target/surefire 2022-06-08T22-53-57_854-jvmRun1 surefire15092783785333360308tmp surefire_012073029739279564724tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/jonas/IdeaProjects/PrologAssistant/target/test-classes:/home/jonas/IdeaProjects/PrologAssistant/target/classes:/home/jonas/.m2/repository/de/sciss/sphinx4-data/1.0.0/sphinx4-data-1.0.0.jar:/home/jonas/.m2/repository/net/sf/phat/sphinx4-core/5prealpha/sphinx4-core-5prealpha.jar:/home/jonas/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.2/junit-jupiter-5.8.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar:/home/jonas/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/jonas/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar:/home/jonas/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.2/junit-jupiter-params-5.8.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar:/home/jonas/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,7 +27,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/jonas/IdeaProjects/PrologAssistant/target/surefire/surefirebooter4699580683278308695.jar"/>
+    <property name="surefire.real.class.path" value="/home/jonas/IdeaProjects/PrologAssistant/target/surefire/surefirebooter12795344730771020358.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.1.1+2-6"/>
     <property name="user.name" value="jonas"/>

@@ -22,7 +22,7 @@ public abstract class Term extends PlPattern {
     public String getName() {return name;}
 
 
-    static Pattern compound = Pattern.compile("([a-z]+)\\(((?:.+,?)+)\\)");
+    static Pattern compound = Pattern.compile("([a-z]+)\\((.+)\\)");
     static Pattern list = Pattern.compile("\\[([^,]+,?)*\\]");
     static Pattern var = Pattern.compile("[A-Z]+");
     static Pattern atom = Pattern.compile("[a-z]+");
@@ -57,10 +57,14 @@ public abstract class Term extends PlPattern {
 
     private static Compound matchCompound(Matcher compoundMatcher) {
         String args = compoundMatcher.group(2);
-        String[] values = args.split(",");
+        String[] values = args.split("\\[[^\\]]*\\]|(,)");
         Term[] terms = new Term[values.length];
         for (int i = 0; i < values.length; i++) {
             terms[i] = (Term.textToTerm(values[i]));
+        }
+        if(values.length == 0) {
+            terms = new Term[1];
+            terms[0] = Term.textToTerm(args);
         }
         return new Compound(compoundMatcher.group(1), terms);
     }
@@ -79,6 +83,10 @@ public abstract class Term extends PlPattern {
             acc = (PList) acc.next;
         }
         return list;
+    }
+
+    public boolean contains(Term c) {
+        return false;
     }
 
 }

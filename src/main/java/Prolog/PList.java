@@ -95,4 +95,45 @@ public class PList extends Term {
         }
         return out;
     }
+
+    @Override
+    public boolean contains(Term c) {
+        if(!hasNext()) {
+            return false;
+        }
+        return item.equals(c) || next.contains(c);
+    }
+
+    public PList take(int n) {
+        if(n > 0) {
+            return new PList(this, next.take(n-1));
+        }
+        return new PList(null);
+    }
+
+    public PList drop(int n) {
+        if(n == 0) {
+            return this;
+        }
+        return next.drop(n-1);
+    }
+
+    public PList concat(PList other) {
+        if(isEmpty()) {
+            return other;
+        }
+        PList connection = this;
+        while(!connection.hasNext()) {
+            connection = connection.next;
+        }
+        connection.next = other;
+        return this;
+    }
+
+    public int length() {
+        if(isEmpty()) {
+            return 0;
+        }
+        return 1 + next.length();
+    }
 }

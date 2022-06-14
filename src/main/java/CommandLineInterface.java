@@ -17,6 +17,9 @@ public class CommandLineInterface {
         boolean running = true;
         while (running) {
             String input = scanner.next();
+            if(input.equals("quit")) {
+                break;
+            }
             if(input.startsWith("?")) {
                 try {
                     Query q  = env.Query(Term.textToTerm(input.substring(1)));

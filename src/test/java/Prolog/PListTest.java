@@ -25,4 +25,6 @@ class PListTest {
         Term out = Term.textToTerm("[c,b,a]");
         assertTrue(test.reverse().equals(out));
     }
+
+
 }
