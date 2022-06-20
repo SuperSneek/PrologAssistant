@@ -1,4 +1,19 @@
 -------------------------------------------------------------------------------
 Test set: Prolog.Unification.UnifierTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.05 s - in Prolog.Unification.UnifierTest
+Tests run: 7, Failures: 0, Errors: 4, Skipped: 0, Time elapsed: 0.032 s <<< FAILURE! - in Prolog.Unification.UnifierTest
+testUnifyWithVariablesInCompound  Time elapsed: 0.012 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "Prolog.Unification.UnificationClauses.ListReexecution.SolutionFinder.hasNext()" because "finder" is null
+	at Prolog.Unification.UnifierTest.testUnifyWithVariablesInCompound(UnifierTest.java:82)
+
+testEmbeddedVariable  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "Prolog.Unification.UnificationClauses.ListReexecution.SolutionFinder.hasNext()" because "finder" is null
+	at Prolog.Unification.UnifierTest.testEmbeddedVariable(UnifierTest.java:97)
+
+testUnifyListWithVariables  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "Prolog.Unification.UnificationClauses.ListReexecution.SolutionFinder.hasNext()" because "finder" is null
+	at Prolog.Unification.UnifierTest.testUnifyListWithVariables(UnifierTest.java:66)
+
+testUnifyListWithAtoms  Time elapsed: 0.006 s  <<< ERROR!
+java.lang.StackOverflowError
+

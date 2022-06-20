@@ -11,6 +11,7 @@ import Prolog.Variable;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,6 +36,32 @@ public class ListReexecution extends UnificationClauseCarrier {
         leftRemaining = left;
         rightRemaining = right;
         parse();
+        clean();
+        current = new CompositeClauseCarrier(domainList);
+    }
+
+    private void clean() {
+        if(domainList.size() <= 1) {
+            return;
+        }
+        //Code is inefficient but only executed at startup
+        List<UnificationClauseCarrier> newDomain = new LinkedList<>();
+        boolean done = false;
+        for (int i = 0; i < domainList.size() - 1; i++) {
+            if(domainList.get(i) instanceof VariableDomain & domainList.get(i+1) instanceof VariableDomain) {
+                VariableDomain a = (VariableDomain) domainList.get(i);
+                VariableDomain b = (VariableDomain) domainList.get(i+1);
+                newDomain.add(a.merge(b));
+                break;
+            }
+            if(i == domainList.size() - 1) {
+                done = true;
+            }
+        }
+        domainList = newDomain;
+        if(!done) {
+            clean();
+        }
     }
 
     public void parse() throws UnificationFailureException {
@@ -52,7 +79,6 @@ public class ListReexecution extends UnificationClauseCarrier {
         if(!leftRemaining.isEmpty() || !rightRemaining.isEmpty()) {
             throw new UnificationFailureException();
         }
-        current = new CompositeClauseCarrier(domainList);
     }
 
     /**
@@ -71,7 +97,7 @@ public class ListReexecution extends UnificationClauseCarrier {
             list = new PList(termList.item, list);
             termList = termList.next;
         }
-        domainList.add(new VariableDomain(variable, list.reverse()));
+        domainList.add(new VariableDomain(List.of(variable), list.reverse()));
         return termList;
     }
 

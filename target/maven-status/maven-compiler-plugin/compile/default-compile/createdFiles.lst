@@ -1,5 +1,5 @@
-Prolog/PList.class
+Prolog\PList.class
 VoiceInterface.class
 PrologConnector.class
 CommandLineInterface.class
-Prolog/Unification/UnificationClauses/ListReexecution/ListReexecution.class
+Prolog\Unification\UnificationClauses\ListReexecution\ListReexecution.class

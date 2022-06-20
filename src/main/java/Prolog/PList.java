@@ -106,7 +106,7 @@ public class PList extends Term {
 
     public PList take(int n) {
         if(n > 0) {
-            return new PList(this, next.take(n-1));
+            return new PList(item, next.take(n-1));
         }
         return new PList(null);
     }
@@ -123,7 +123,7 @@ public class PList extends Term {
             return other;
         }
         PList connection = this;
-        while(!connection.hasNext()) {
+        while(connection.hasNext()) {
             connection = connection.next;
         }
         connection.next = other;
