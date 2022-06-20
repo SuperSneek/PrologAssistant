@@ -55,8 +55,14 @@ public class Unifier implements Iterator<Map<String, Term>> {
             out.put(head.right.getName(), head.left);
             return out;
         } else {
-            carrier = new CompositeClauseCarrier(List.of(head.right.generateClauses(head.left),
-                    new ClauseList(tail)));
+
+            try {
+                carrier = new CompositeClauseCarrier(List.of(head.right.generateClauses(head.left),
+                        new ClauseList(tail)));
+            } catch (UnificationFailureException e) {
+                carrier = new CompositeClauseCarrier(List.of(head.left.generateClauses(head.right),
+                        new ClauseList(tail)));
+            }
             return next();
         }
     }
@@ -67,6 +73,9 @@ public class Unifier implements Iterator<Map<String, Term>> {
             return false;
         }
         try {
+            if(resultCurrent) {
+                return true;
+            }
             result = RecursiveUnify(carrier.next());
             resultCurrent = true;
             return true;

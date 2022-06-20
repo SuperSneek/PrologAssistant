@@ -40,7 +40,7 @@ public class SolutionFinder implements Iterator<int[]> {
             if(dirty) {
                 bufferedSolution = next();
                 dirty = false;
-                return true;
+                return !done;
             }
         }
         return true;

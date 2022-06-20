@@ -9,18 +9,8 @@ import java.util.List;
 public class CompositeClauseCarrier extends UnificationClauseCarrier {
 
     private final List<UnificationClauseCarrier> carriers;
-    private final List<ClauseList> previousResults = new ArrayList<>();
-
     public CompositeClauseCarrier(List<UnificationClauseCarrier> carriers) throws UnificationFailureException {
         this.carriers = carriers;
-        for (UnificationClauseCarrier item:
-                carriers) {
-            if(item.hasNext()) {
-                previousResults.add(new ClauseList(item.next()));
-            } else {
-                throw new UnificationFailureException();
-            }
-        }
     }
 
     public boolean hasNext() {

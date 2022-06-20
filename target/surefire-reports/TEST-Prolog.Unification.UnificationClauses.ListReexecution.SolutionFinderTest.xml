@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.Unification.UnifierTest" time="0.041" tests="7" errors="1" skipped="0" failures="2">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.Unification.UnificationClauses.ListReexecution.SolutionFinderTest" time="0.051" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -52,23 +52,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testUnifyWithVariablesInCompound" classname="Prolog.Unification.UnifierTest" time="0.01">
-    <error message="Index 2 out of bounds for length 2" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
-	at Prolog.Unification.UnifierTest.testUnifyWithVariablesInCompound(UnifierTest.java:82)
-</error>
-  </testcase>
-  <testcase name="testUnifyAtoms" classname="Prolog.Unification.UnifierTest" time="0.005"/>
-  <testcase name="testEmbeddedVariable" classname="Prolog.Unification.UnifierTest" time="0.003">
-    <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at Prolog.Unification.UnifierTest.testEmbeddedVariable(UnifierTest.java:98)
-]]></failure>
-  </testcase>
-  <testcase name="testVariableCarryOver" classname="Prolog.Unification.UnifierTest" time="0.003"/>
-  <testcase name="testUnifyVariables" classname="Prolog.Unification.UnifierTest" time="0.004"/>
-  <testcase name="testUnifyListWithVariables" classname="Prolog.Unification.UnifierTest" time="0.011">
-    <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at Prolog.Unification.UnifierTest.testUnifyListWithVariables(UnifierTest.java:69)
-]]></failure>
-  </testcase>
-  <testcase name="testUnifyListWithAtoms" classname="Prolog.Unification.UnifierTest" time="0.001"/>
+  <testcase name="testFindSimpleSolution" classname="Prolog.Unification.UnificationClauses.ListReexecution.SolutionFinderTest" time="0.033"/>
 </testsuite>

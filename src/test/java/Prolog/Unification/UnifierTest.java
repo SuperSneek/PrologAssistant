@@ -89,6 +89,22 @@ class UnifierTest {
     }
 
     @Test
+    void testReexecution() throws UnificationFailureException {
+        Unifier u = new Unifier(Term.textToTerm("[a,b]"), Term.textToTerm("[X,Y]"), new HashMap<>());
+        Map<String, Term> s;
+        assertTrue(u.hasNext());
+        assertTrue(u.hasNext());
+        assertTrue(u.hasNext());
+        s = u.next(); //0,2
+        assertTrue(u.hasNext());
+        s=u.next(); //1,1
+        assertTrue(u.hasNext());
+        s=u.next(); //2,00
+        assertFalse(u.hasNext());
+
+    }
+
+    @Test
     public void testEmbeddedVariable() {
         mgu.put("X", Term.textToTerm("[b]"));
         PList test = (PList) Term.textToTerm("[a,b,c]");

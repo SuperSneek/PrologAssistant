@@ -17,7 +17,7 @@ public class VariableDomain extends UnificationClauseCarrier {
     public VariableDomain(List<Variable> variables, PList list) {
         this.variables = variables;
         this.list = list;
-        variableLengths = new int[list.length()];
+        variableLengths = new int[variables.size()];
         size = variables.size();
         listLength = list.length();
         finders = new SolutionFinder[variables.size()];
@@ -30,13 +30,7 @@ public class VariableDomain extends UnificationClauseCarrier {
         variables = Stream.concat(variables.stream(), other.variables.stream())
                 .collect(Collectors.toList());
         list = list.concat(other.list);
-        finders = new SolutionFinder[variables.size()];
-        size = variables.size();
-        listLength = list.length();
-        for (int i = 0; i < finders.length; i++) {
-            finders[i] = new SolutionFinder(size, 0, i, listLength);
-        }
-        return this;
+        return new VariableDomain(variables, list);
     }
 
     int[] variableLengths;
@@ -80,7 +74,7 @@ public class VariableDomain extends UnificationClauseCarrier {
         for (int i = 0; i < size; i++) {
             if(variableLengths[i] < listLength) {
                 variableLengths[i]++;
-                finders[i] = new SolutionFinder(variableLengths.length, variableLengths[i], i, listLength);
+                finders[i] = new SolutionFinder(size, variableLengths[i], i, listLength);
                 return next();
             }
         }
