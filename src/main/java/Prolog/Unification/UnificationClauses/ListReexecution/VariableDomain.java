@@ -54,8 +54,8 @@ public class VariableDomain extends UnificationClauseCarrier {
             }
         }
 
-        for (int listLength : variableLengths) {
-            if (listLength < variableLengths.length) {
+        for (int val : variableLengths) {
+            if (val < listLength) {
                 return true;
             }
         }

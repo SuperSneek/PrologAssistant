@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 public class PrologEnv extends Thread {
 
-    private Unifier currentUnifier;
 
     List<PlPattern> loadedPatterns = new LinkedList<>();
 
@@ -31,6 +30,10 @@ public class PrologEnv extends Thread {
 
     public Query Query(Term query) throws UnificationFailureException {
         return new Query(query, this);
+    }
+
+    public Query Query(Term query, Map<String, Term> vars) throws UnificationFailureException {
+        return new Query(query, this, vars);
     }
 
     public Iterator<PlPattern> findMatchingPatterns(Term match) {

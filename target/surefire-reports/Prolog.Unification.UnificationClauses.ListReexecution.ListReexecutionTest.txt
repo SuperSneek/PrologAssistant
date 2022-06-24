@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.015 s <<< FAILURE! - in Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest
+testSingleVariable  Time elapsed: 0.002 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "java.util.Collection.toArray()" because "c" is null
+	at Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest.testSingleVariable(ListReexecutionTest.java:29)
+

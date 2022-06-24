@@ -2,6 +2,7 @@ package Prolog;
 
 import Prolog.Unification.UnificationFailureException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Rule extends PlPattern {
@@ -24,7 +25,8 @@ public class Rule extends PlPattern {
 
     @Override
     public Map<String, Term> unify(Term queryTerm, PrologEnv env,Map<String, Term> vars) throws UnificationFailureException {
-        Query answer = env.Query(right);
+        Map<String, Term> takenVars = left.unify(queryTerm, env, vars);
+        Query answer = env.Query(right, takenVars);
         Map<String, Term> var = answer.next();
         if(var != null) {
             return var;

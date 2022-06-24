@@ -2,50 +2,55 @@
 <testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.TermTest" time="0.002" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/home/jonas/IdeaProjects/PrologAssistant/target/test-classes:/home/jonas/IdeaProjects/PrologAssistant/target/classes:/home/jonas/.m2/repository/de/sciss/sphinx4-data/1.0.0/sphinx4-data-1.0.0.jar:/home/jonas/.m2/repository/net/sf/phat/sphinx4-core/5prealpha/sphinx4-core-5prealpha.jar:/home/jonas/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.2/junit-jupiter-5.8.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar:/home/jonas/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/jonas/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar:/home/jonas/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.2/junit-jupiter-params-5.8.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar:/home/jonas/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar:"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\Jonas\Documents\Uni\PrologAssistant\target\test-classes;C:\Users\Jonas\Documents\Uni\PrologAssistant\target\classes;C:\Users\Jonas\.m2\repository\de\sciss\sphinx4-data\1.0.0\sphinx4-data-1.0.0.jar;C:\Users\Jonas\.m2\repository\net\sf\phat\sphinx4-core\5prealpha\sphinx4-core-5prealpha.jar;C:\Users\Jonas\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.2\junit-jupiter-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Jonas\.m2\repository\org\junit\platform\junit-platform-commons\1.8.2\junit-platform-commons-1.8.2.jar;C:\Users\Jonas\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.2\junit-jupiter-engine-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\junit\platform\junit-platform-engine\1.8.2\junit-platform-engine-1.8.2.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
     <property name="java.vendor.url" value="https://java.oracle.com/"/>
-    <property name="os.name" value="Linux"/>
+    <property name="user.timezone" value="Europe/Berlin"/>
+    <property name="os.name" value="Windows 10"/>
     <property name="java.vm.specification.version" value="18"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="user.country" value="US"/>
-    <property name="sun.boot.library.path" value="/home/jonas/.jdks/openjdk-18.0.1.1/lib"/>
-    <property name="sun.java.command" value="/home/jonas/IdeaProjects/PrologAssistant/target/surefire/surefirebooter557234957528309459.jar /home/jonas/IdeaProjects/PrologAssistant/target/surefire 2022-06-20T14-01-31_042-jvmRun1 surefire2040842367918270697tmp surefire_012207959967515255000tmp"/>
+    <property name="user.country" value="DE"/>
+    <property name="sun.boot.library.path" value="C:\Users\Jonas\.jdks\openjdk-18.0.1.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\Jonas\AppData\Local\Temp\surefire2090104229018027980\surefirebooter13145133622080064705.jar C:\Users\Jonas\AppData\Local\Temp\surefire2090104229018027980 2022-06-22T13-52-08_077-jvmRun1 surefire2568469469765925646tmp surefire_013438269391819527771tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/home/jonas/IdeaProjects/PrologAssistant/target/test-classes:/home/jonas/IdeaProjects/PrologAssistant/target/classes:/home/jonas/.m2/repository/de/sciss/sphinx4-data/1.0.0/sphinx4-data-1.0.0.jar:/home/jonas/.m2/repository/net/sf/phat/sphinx4-core/5prealpha/sphinx4-core-5prealpha.jar:/home/jonas/.m2/repository/org/projectlombok/lombok/1.18.24/lombok-1.18.24.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter/5.8.2/junit-jupiter-5.8.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.8.2/junit-jupiter-api-5.8.2.jar:/home/jonas/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/jonas/.m2/repository/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar:/home/jonas/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.8.2/junit-jupiter-params-5.8.2.jar:/home/jonas/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.8.2/junit-jupiter-engine-5.8.2.jar:/home/jonas/.m2/repository/org/junit/platform/junit-platform-engine/1.8.2/junit-platform-engine-1.8.2.jar:"/>
+    <property name="surefire.test.class.path" value="C:\Users\Jonas\Documents\Uni\PrologAssistant\target\test-classes;C:\Users\Jonas\Documents\Uni\PrologAssistant\target\classes;C:\Users\Jonas\.m2\repository\de\sciss\sphinx4-data\1.0.0\sphinx4-data-1.0.0.jar;C:\Users\Jonas\.m2\repository\net\sf\phat\sphinx4-core\5prealpha\sphinx4-core-5prealpha.jar;C:\Users\Jonas\.m2\repository\org\projectlombok\lombok\1.18.24\lombok-1.18.24.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter\5.8.2\junit-jupiter-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.8.2\junit-jupiter-api-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Jonas\.m2\repository\org\junit\platform\junit-platform-commons\1.8.2\junit-platform-commons-1.8.2.jar;C:\Users\Jonas\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.8.2\junit-jupiter-params-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.8.2\junit-jupiter-engine-5.8.2.jar;C:\Users\Jonas\.m2\repository\org\junit\platform\junit-platform-engine\1.8.2\junit-platform-engine-1.8.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/home/jonas"/>
-    <property name="user.language" value="en"/>
+    <property name="user.home" value="C:\Users\Jonas"/>
+    <property name="user.language" value="de"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2022-04-22"/>
-    <property name="java.home" value="/home/jonas/.jdks/openjdk-18.0.1.1"/>
-    <property name="file.separator" value="/"/>
-    <property name="basedir" value="/home/jonas/IdeaProjects/PrologAssistant"/>
-    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="java.home" value="C:\Users\Jonas\.jdks\openjdk-18.0.1.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\Jonas\Documents\Uni\PrologAssistant"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="/home/jonas/IdeaProjects/PrologAssistant/target/surefire/surefirebooter557234957528309459.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Jonas\AppData\Local\Temp\surefire2090104229018027980\surefirebooter13145133622080064705.jar"/>
+    <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18.0.1.1+2-6"/>
-    <property name="user.name" value="jonas"/>
-    <property name="path.separator" value=":"/>
-    <property name="os.version" value="5.13.0-51-generic"/>
+    <property name="user.name" value="Jonas"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="localRepository" value="/home/jonas/.m2/repository"/>
+    <property name="localRepository" value="C:\Users\Jonas\.m2\repository"/>
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
-    <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="idea.version" value="2022.1"/>
+    <property name="java.io.tmpdir" value="C:\Users\Jonas\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2021.1.2"/>
     <property name="java.version" value="18.0.1.1"/>
-    <property name="user.dir" value="/home/jonas/IdeaProjects/PrologAssistant"/>
+    <property name="user.dir" value="C:\Users\Jonas\Documents\Uni\PrologAssistant"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="native.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\Jonas\.jdks\openjdk-18.0.1.1\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Java\jdk-16.0.2\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet\;C:\Users\Jonas\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\Jonas\AppData\Local\Programs\Python\Python39\;C:\Users\Jonas\AppData\Local\Microsoft\WindowsApps;E:\Programmieren\Microsoft VS Code\bin;E:\Programmieren\IntelliJ IDEA 2021.1.2\bin;;G:\Programme\Postgres\bin;C:\Users\Jonas\AppData\Roaming\npm;C:\Users\Jonas\AppData\Roaming\cabal\bin;C:\tools\ghc-9.0.1\bin;C:\tools\msys64;C:\Users\Jonas\.dotnet\tools;."/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="java.vm.version" value="18.0.1.1+2-6"/>
@@ -55,5 +60,5 @@
   <testcase name="TestMatchLists" classname="Prolog.TermTest" time="0"/>
   <testcase name="TestMatchCompoundList" classname="Prolog.TermTest" time="0"/>
   <testcase name="TestMatchCompoundNormal" classname="Prolog.TermTest" time="0"/>
-  <testcase name="TestMatchAtom" classname="Prolog.TermTest" time="0"/>
+  <testcase name="TestMatchAtom" classname="Prolog.TermTest" time="0.001"/>
 </testsuite>

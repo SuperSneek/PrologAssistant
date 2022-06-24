@@ -30,9 +30,9 @@ public class CompositeClauseCarrier extends UnificationClauseCarrier {
                 carriers) {
             if(item.hasNext() && !hasChanged) {
                 hasChanged = true;
-                item.next();
+                out.addAll(item.next());
             }
-            out.addAll(item.next());
+
         }
         if(!hasChanged) {
             return null;

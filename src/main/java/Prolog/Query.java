@@ -13,7 +13,7 @@ public class Query implements Iterator<Map<String, Term>> {
     private final Iterator<PlPattern> patternIterator;
     private final PrologEnv env;
     private final Term query;
-
+    private final Map<String, Term> vars;
 
 
     public Query(Term queryTerm, PrologEnv env) {
@@ -21,6 +21,15 @@ public class Query implements Iterator<Map<String, Term>> {
         patternIterator = env.findMatchingPatterns(queryTerm);
         this.env = env;
         this.query = queryTerm;
+        vars = new HashMap<>();
+    }
+
+    public Query(Term queryTerm, PrologEnv env, Map<String, Term> vars) {
+        //TODO: multithread
+        patternIterator = env.findMatchingPatterns(queryTerm);
+        this.env = env;
+        this.query = queryTerm;
+        this.vars = vars;
     }
 
     private Map<String, Term> unifyPattern() throws UnificationFailureException {
@@ -29,7 +38,7 @@ public class Query implements Iterator<Map<String, Term>> {
             throw new UnificationFailureException();
         }
         PlPattern pattern = patternIterator.next();
-        return (pattern.unify(query, env, new HashMap<String, Term>()));
+        return (pattern.unify(query, env, vars));
     }
 
     @Override

@@ -19,6 +19,7 @@ public class Unifier implements Iterator<Map<String, Term>> {
     Map<String, Term> result = new HashMap<>();
 
     public Unifier(Term X, Term Y, Map<String, Term> vars) throws UnificationFailureException {
+        this.vars.addAll(vars.keySet());
         try {
             carrier = X.generateClauses(Y);
         } catch (UnificationFailureException e) {
@@ -55,15 +56,15 @@ public class Unifier implements Iterator<Map<String, Term>> {
             out.put(head.right.getName(), head.left);
             return out;
         } else {
-
-            try {
-                carrier = new CompositeClauseCarrier(List.of(head.right.generateClauses(head.left),
-                        new ClauseList(tail)));
-            } catch (UnificationFailureException e) {
-                carrier = new CompositeClauseCarrier(List.of(head.left.generateClauses(head.right),
-                        new ClauseList(tail)));
-            }
-            return next();
+            throw new UnificationFailureException();
+           // try {
+           //     carrier = new CompositeClauseCarrier(List.of(head.right.generateClauses(head.left),
+           //             new ClauseList(tail)));
+           // } catch (UnificationFailureException e) {
+           //     carrier = new CompositeClauseCarrier(List.of(head.left.generateClauses(head.right),
+           //             new ClauseList(tail)));
+           // }
+           // return next();
         }
     }
 

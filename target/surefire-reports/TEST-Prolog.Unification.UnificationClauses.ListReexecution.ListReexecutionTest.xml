@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.PListTest" time="0.033" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest" time="0.015" tests="3" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="18"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -57,9 +57,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testListConcat" classname="Prolog.PListTest" time="0.024"/>
-  <testcase name="testEmptyList" classname="Prolog.PListTest" time="0"/>
-  <testcase name="takeTest" classname="Prolog.PListTest" time="0"/>
-  <testcase name="testListReverse" classname="Prolog.PListTest" time="0.001"/>
-  <testcase name="testEmptyListAdd" classname="Prolog.PListTest" time="0.001"/>
+  <testcase name="testAtomReexecution" classname="Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest" time="0.005"/>
+  <testcase name="testMultipleVariables" classname="Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest" time="0.006"/>
+  <testcase name="testSingleVariable" classname="Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest" time="0.002">
+    <error message="Cannot invoke &quot;java.util.Collection.toArray()&quot; because &quot;c&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke "java.util.Collection.toArray()" because "c" is null
+	at Prolog.Unification.UnificationClauses.ListReexecution.ListReexecutionTest.testSingleVariable(ListReexecutionTest.java:29)
+</error>
+  </testcase>
 </testsuite>
