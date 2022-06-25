@@ -2,6 +2,7 @@ package Prolog.Unification.UnificationClauses.ListReexecution;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class SolutionFinder implements Iterator<int[]> {
@@ -19,14 +20,19 @@ public class SolutionFinder implements Iterator<int[]> {
         this.index=index;
         this.sumMax = sumMax;
         if(length > 0) {
+            maxValues = new int[length];
+            minValues = new int[length];
+            maxValues[index] = value;
             values = new int[length];
-            values[index] = value;
         } else {
             done = true;
         }
 
     }
     private final int sumMax;
+    private int[] minValues;
+    private int[] maxValues;
+
     private int[] values;
     private boolean done = false;
     private boolean dirty = true;
@@ -38,9 +44,9 @@ public class SolutionFinder implements Iterator<int[]> {
             return false;
         } else {
             if(dirty) {
-                bufferedSolution = next();
+                bufferedSolution = calculateSolutionWithIndex();
                 dirty = false;
-                return !done;
+                return true;
             }
         }
         return true;
@@ -52,24 +58,12 @@ public class SolutionFinder implements Iterator<int[]> {
             dirty = true;
             return bufferedSolution;
         }
-        int[] solution = values.clone();
-        int sum = 0;
+        return calculateSolutionWithIndex();
+    }
+
+    private boolean tryChangeMaxValues() {
         boolean changed = false;
-        for (int i = 0; i < solution.length - 1; i++) {
-            sum += solution[i];
-            if(i == index) {
-                continue;
-            }
-            if(solution[i] < sumMax - sum && !changed) {
-                values[i]++;
-                changed = true;
-            }
-        }
-        if(!changed) {
-            done = true;
-        }
-        solution[solution.length - 1] = sumMax - sum;
-        return solution;
+
     }
 
     private int[] calculateSolutionWithIndex() throws IllegalArgumentException {
@@ -81,24 +75,20 @@ public class SolutionFinder implements Iterator<int[]> {
             if(i == index) {
                 continue;
             }
-            if(solution[i] < sumMax - sum && !changed) {
+            if(solution[i] < sumMax && !changed) {
                 values[i]++;
+                maxValues[i] = Math.max(maxValues[i], values[i]);
+                changed = true;
+            } else if(solution[i] > 0 && !changed) {
+                values[i]--;
+                maxValues[i] = Math.max(minValues[i], values[i]);
                 changed = true;
             }
         }
         if(!changed) {
             done = true;
         }
-        for (int j = 0; j < length; j++) {
-            //Find first non index instance where sum of solution is equal to values
-            if(j == index) {
-                continue;
-            }
-            if()
-        }
-        if(sumMax != sum) {
-            throw new IllegalArgumentException("Solution is impossible");
-        }
+        solution[solution.length - 1] = sumMax - sum;
         return solution;
     }
 }
