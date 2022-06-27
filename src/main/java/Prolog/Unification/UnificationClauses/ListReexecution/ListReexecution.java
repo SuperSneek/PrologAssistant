@@ -47,12 +47,14 @@ public class ListReexecution extends UnificationClauseCarrier {
         //Code is inefficient but only executed at startup
         List<UnificationClauseCarrier> newDomain = new LinkedList<>();
         boolean done = false;
-        for (int i = 0; i < domainList.size() - 1; i++) {
-            if(domainList.get(i) instanceof VariableDomain & domainList.get(i+1) instanceof VariableDomain) {
+        for (int i = 0; i < domainList.size(); i++) {
+            if(i < domainList.size() - 1 && domainList.get(i) instanceof VariableDomain & domainList.get(i+1) instanceof VariableDomain) {
                 VariableDomain a = (VariableDomain) domainList.get(i);
                 VariableDomain b = (VariableDomain) domainList.get(i+1);
                 newDomain.add(a.merge(b));
                 break;
+            } else {
+                newDomain.add(domainList.get(i));
             }
             if(i == domainList.size() - 1) {
                 done = true;

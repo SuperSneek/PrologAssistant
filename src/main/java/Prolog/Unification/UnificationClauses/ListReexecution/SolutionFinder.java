@@ -1,94 +1,41 @@
 package Prolog.Unification.UnificationClauses.ListReexecution;
-
-import lombok.AllArgsConstructor;
-
-import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Stack;
+
 
 public class SolutionFinder implements Iterator<int[]> {
 
-    private final int length;
-    private final int value;
-    private final int index;
-
-
-    public SolutionFinder(int length,
-            int value,
-            int index, int sumMax) {
-        this.length=length;
-        this.value=value;
-        this.index=index;
-        this.sumMax = sumMax;
-        if(length > 0) {
-            maxValues = new int[length];
-            minValues = new int[length];
-            maxValues[index] = value;
-            values = new int[length];
-        } else {
-            done = true;
+    public SolutionFinder(int sum, int dimension) {
+        if(dimension == 1) {
+            solver = new OneDimensionalSolver(sum);
         }
-
+        else if(dimension > 2) {
+            solver = new MultiDimensionalMutlilinearSolver(dimension, sum);
+        } else {
+            solver = new TwoDimensionalMultilinearSolver(sum);
+        }
     }
-    private final int sumMax;
-    private int[] minValues;
-    private int[] maxValues;
 
-    private int[] values;
-    private boolean done = false;
-    private boolean dirty = true;
-    private int[] bufferedSolution;
+    private final MultiLinearSolver solver;
+    private int value;
+    private int sumMax;
 
     @Override
     public boolean hasNext() {
-        if(done && dirty) {
-            return false;
-        } else {
-            if(dirty) {
-                bufferedSolution = calculateSolutionWithIndex();
-                dirty = false;
-                return true;
-            }
-        }
-        return true;
+        return solver.hasNext();
     }
 
     @Override
     public int[] next() {
-        if(!dirty) {
-            dirty = true;
-            return bufferedSolution;
-        }
-        return calculateSolutionWithIndex();
-    }
-
-    private boolean tryChangeMaxValues() {
-        boolean changed = false;
-
-    }
-
-    private int[] calculateSolutionWithIndex() throws IllegalArgumentException {
-        int[] solution = values.clone();
-        int sum = 0;
-        boolean changed = false;
-        for (int i = 0; i < solution.length - 1; i++) {
-            sum += solution[i];
-            if(i == index) {
-                continue;
+        try {
+            Stack<Integer> out = solver.next();
+            int[] put = new int[out.size()];
+            for (int i = 0; i < put.length; i++) {
+                put[i] = out.pop();
             }
-            if(solution[i] < sumMax && !changed) {
-                values[i]++;
-                maxValues[i] = Math.max(maxValues[i], values[i]);
-                changed = true;
-            } else if(solution[i] > 0 && !changed) {
-                values[i]--;
-                maxValues[i] = Math.max(minValues[i], values[i]);
-                changed = true;
-            }
+            return put;
+        } catch (IllegalAccessException e) {
+            return null;
         }
-        if(!changed) {
-            done = true;
-        }
-        solution[solution.length - 1] = sumMax - sum;
-        return solution;
     }
 }

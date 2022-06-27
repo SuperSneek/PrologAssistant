@@ -49,7 +49,11 @@ public class Query implements Iterator<Map<String, Term>> {
     @Override
     public Map<String, Term> next() {
         try {
-            return unifyPattern();
+            Map<String, Term> result = unifyPattern();
+            if(result == null) {
+                throw new UnificationFailureException();
+            }
+            return result;
         } catch (UnificationFailureException e) {
             if(patternIterator.hasNext()) {
                 return next();

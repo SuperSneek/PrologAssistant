@@ -20,10 +20,7 @@ public class VariableDomain extends UnificationClauseCarrier {
         variableLengths = new int[variables.size()];
         size = variables.size();
         listLength = list.length();
-        finders = new SolutionFinder[variables.size()];
-        for (int i = 0; i < finders.length; i++) {
-            finders[i] = new SolutionFinder(variables.size(), 0, i, listLength);
-        }
+        finder = new SolutionFinder(listLength, size);
     }
 
     public VariableDomain merge(VariableDomain other) {
@@ -42,43 +39,17 @@ public class VariableDomain extends UnificationClauseCarrier {
 
     private List<Variable> variables;
 
-    SolutionFinder[] finders ;
+    SolutionFinder finder;
 
     @Override
     public boolean hasNext() {
-
-        for (SolutionFinder finder:
-             finders) {
-            if(finder.hasNext()) {
-                return true;
-            }
-        }
-
-        for (int val : variableLengths) {
-            if (val < listLength) {
-                return true;
-            }
-        }
-        return false;
+        return finder.hasNext();
     }
 
     @Override
     public List<UnificationClause> next() {
         //See if we can generate a solution without changing a variable length
-        for (int i = 0; i < size; i++) {
-            if(finders[i].hasNext()) {
-                return generateSolution(finders[i].next());
-            }
-        }
-
-        for (int i = 0; i < size; i++) {
-            if(variableLengths[i] < listLength) {
-                variableLengths[i]++;
-                finders[i] = new SolutionFinder(size, variableLengths[i], i, listLength);
-                return next();
-            }
-        }
-        return null;
+        return generateSolution(finder.next());
     }
 
     public List<UnificationClause> generateSolution(int[] solution) {

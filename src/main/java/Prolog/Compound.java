@@ -1,6 +1,7 @@
 package Prolog;
 
 import Prolog.Unification.UnificationClauses.ClauseList;
+import Prolog.Unification.UnificationClauses.CompositeClauseCarrier;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
@@ -29,11 +30,11 @@ public class Compound extends Term {
     public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
         if(other instanceof Compound otherC) {
             if(otherC.values.length == values.length) {
-                ArrayList<UnificationClause> out = new ArrayList<UnificationClause>();
+                ArrayList<UnificationClauseCarrier> out = new ArrayList<>();
                 for (int i = 0; i < values.length; i++) {
-                    out.add(new UnificationClause(otherC.values[i], values[i]));
+                    out.add((otherC.values[i].generateClauses(values[i])));
                 }
-                return new ClauseList(out);
+                return new CompositeClauseCarrier(out);
             }
         }
         throw new UnificationFailureException();

@@ -120,13 +120,18 @@ class UnifierTest {
         }
     }
 
+    /**
+     * This test makes sure that variables are
+     * @throws UnificationFailureException If something very unexpected goes wrong
+     */
     @Test
     public void testVariableCarryOver() throws UnificationFailureException {
         PList test = (PList) Term.textToTerm("[a,X,c]");
         Term out = Term.textToTerm("X");
         Unifier u = new Unifier(test, out, new HashMap<>());
-        assertFalse(u.hasNext());
+        assertTrue(u.hasNext());
         assertNull(u.next());
+        assertFalse(u.hasNext());
     }
 
 

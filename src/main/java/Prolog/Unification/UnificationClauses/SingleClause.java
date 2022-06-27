@@ -22,6 +22,8 @@ public class SingleClause extends UnificationClauseCarrier {
 
     @Override
     public List<UnificationClause> next() {
-        return returned ? null : List.of(clause);
+        boolean temp = returned;
+        returned = true;
+        return temp ? null : List.of(clause);
     }
 }

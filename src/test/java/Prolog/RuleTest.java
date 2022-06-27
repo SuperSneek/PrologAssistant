@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RuleTest {
 
+
     @Test
     public void testRuleUnification() throws UnificationFailureException {
         PrologEnv env = new PrologEnv();
@@ -15,7 +16,7 @@ class RuleTest {
         assertNull(env.Query(Term.textToTerm("test(dog)")).next());
         env.LoadPattern("cat(dog)");
         Query q = env.Query(Term.textToTerm("test(dog)"));
-        assertNotNull(env.Query(Term.textToTerm("test(dog)")).next());
+        assertNotNull(q.next());
     }
 
     @Test

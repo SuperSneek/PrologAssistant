@@ -10,7 +10,9 @@ import java.util.*;
 
 public class Unifier implements Iterator<Map<String, Term>> {
 
-    List<String> vars = new LinkedList<>();
+    private final List<Substitution> subs;
+
+    private final List<String> externalvars = new ArrayList<>();
 
     private UnificationClauseCarrier carrier;
 
@@ -19,7 +21,8 @@ public class Unifier implements Iterator<Map<String, Term>> {
     Map<String, Term> result = new HashMap<>();
 
     public Unifier(Term X, Term Y, Map<String, Term> vars) throws UnificationFailureException {
-        this.vars.addAll(vars.keySet());
+        subs = createExternalVars(vars);
+        externalvars.addAll(vars.keySet());
         try {
             carrier = X.generateClauses(Y);
         } catch (UnificationFailureException e) {
@@ -27,7 +30,21 @@ public class Unifier implements Iterator<Map<String, Term>> {
         }
     }
 
+    private List<Substitution> createExternalVars(Map<String, Term> vars) {
+        List<Substitution> subs = new LinkedList<>();
+        for(String item : vars.keySet()) {
+            Substitution sub = new Substitution(new Variable(item), vars.get(item));
+            subs.add(sub);
+        }
+        return subs;
+    }
+
     public Map<String, Term> RecursiveUnify(List<UnificationClause> clauses) throws UnificationFailureException {
+        //Apply external vars
+        for(Substitution sub : subs) {
+            clauses = sub.substitute(clauses);
+        }
+        List<String> vars = new LinkedList<>(externalvars);
         if(clauses.size() == 0) {
             return new HashMap<>();
         }
@@ -70,34 +87,18 @@ public class Unifier implements Iterator<Map<String, Term>> {
 
     @Override
     public boolean hasNext() {
-        if(!carrier.hasNext()) {
-            return false;
-        }
-        try {
-            if(resultCurrent) {
-                return true;
-            }
-            result = RecursiveUnify(carrier.next());
-            resultCurrent = true;
-            return true;
-        } catch (UnificationFailureException e) {
-            return false;
-        }
+        return carrier.hasNext();
     }
 
     @Override
     public Map<String, Term> next() {
-        if(resultCurrent) {
-            resultCurrent = false;
-            return result;
-        }
         if(!carrier.hasNext()) {
             return null;
         }
         try {
             return RecursiveUnify(carrier.next());
         } catch (UnificationFailureException e) {
-            return null;
+            return next();
         }
     }
 }

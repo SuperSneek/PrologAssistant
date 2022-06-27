@@ -1,16 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: Prolog.Unification.UnifierTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.009 s <<< FAILURE! - in Prolog.Unification.UnifierTest
-testUnifyWithVariablesInCompound  Time elapsed: 0 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at Prolog.Unification.UnifierTest.testUnifyWithVariablesInCompound(UnifierTest.java:82)
-
-testEmbeddedVariable  Time elapsed: 0 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at Prolog.Unification.UnifierTest.testEmbeddedVariable(UnifierTest.java:114)
-
-testReexecution  Time elapsed: 0.001 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
-	at Prolog.Unification.UnifierTest.testReexecution(UnifierTest.java:99)
-
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s - in Prolog.Unification.UnifierTest
