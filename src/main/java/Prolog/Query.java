@@ -8,13 +8,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Query implements Iterator<Map<String, Term>> {
+public class Query implements Solution {
 
     private final Iterator<PlPattern> patternIterator;
     private final PrologEnv env;
     private final Term query;
     private final Map<String, Term> vars;
 
+    Solution current = new EmptySolution();
 
     public Query(Term queryTerm, PrologEnv env) {
         //TODO: multithread
@@ -33,17 +34,20 @@ public class Query implements Iterator<Map<String, Term>> {
     }
 
     private Map<String, Term> unifyPattern() throws UnificationFailureException {
-        //TODO: remove instanceof stupidity
-        if(!patternIterator.hasNext()) {
+        if(current != null && !patternIterator.hasNext() && !current.hasNext()) {
             throw new UnificationFailureException();
         }
+        if(current != null && current.hasNext()) {
+            return current.next();
+        }
         PlPattern pattern = patternIterator.next();
-        return (pattern.unify(query, env, vars));
+        current = pattern.unify(query, env, vars);
+        return unifyPattern();
     }
 
     @Override
     public boolean hasNext() {
-        return patternIterator.hasNext();
+        return patternIterator.hasNext() || current.hasNext();
     }
 
     @Override

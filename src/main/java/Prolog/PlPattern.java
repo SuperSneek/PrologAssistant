@@ -2,7 +2,7 @@ package Prolog;
 
 import Prolog.Unification.UnificationFailureException;
 
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ public abstract class PlPattern {
         return name.equals(match.getName()) || (match instanceof Variable);
     }
 
-    public abstract Map<String, Term> unify(Term queryTerm, PrologEnv env, Map<String, Term> vars) throws UnificationFailureException;
+    public abstract Solution unify(Term queryTerm, PrologEnv env, Map<String, Term> vars) throws UnificationFailureException;
 
     public static PlPattern textToPattern(String input, PrologEnv env) throws IllegalArgumentException {
         Matcher ruleMatcher = rule.matcher(input);

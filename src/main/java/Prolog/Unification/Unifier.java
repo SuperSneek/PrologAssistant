@@ -8,7 +8,7 @@ import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 
 import java.util.*;
 
-public class Unifier implements Iterator<Map<String, Term>> {
+public class Unifier implements Solution {
 
     private final List<Substitution> subs;
 
@@ -74,14 +74,6 @@ public class Unifier implements Iterator<Map<String, Term>> {
             return out;
         } else {
             throw new UnificationFailureException();
-           // try {
-           //     carrier = new CompositeClauseCarrier(List.of(head.right.generateClauses(head.left),
-           //             new ClauseList(tail)));
-           // } catch (UnificationFailureException e) {
-           //     carrier = new CompositeClauseCarrier(List.of(head.left.generateClauses(head.right),
-           //             new ClauseList(tail)));
-           // }
-           // return next();
         }
     }
 

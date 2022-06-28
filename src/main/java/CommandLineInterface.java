@@ -5,6 +5,7 @@ import Prolog.Unification.UnificationFailureException;
 
 import java.io.Console;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CommandLineInterface {
@@ -24,7 +25,11 @@ public class CommandLineInterface {
                 try {
                     Query q  = env.Query(Term.textToTerm(input.substring(1)));
                     while(q.hasNext()) {
-                        System.out.println("true: " + q.next());
+                        Map<String, Term> answer = q.next();
+                        if(answer == null) {
+                            break;
+                        }
+                        System.out.println("true: " + answer);
                         String s = scanner.next();
                         if(!s.equals(";")) {
                             break;

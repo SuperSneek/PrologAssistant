@@ -1,12 +1,9 @@
 package Prolog;
 
-import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -28,9 +25,9 @@ public abstract class Term extends PlPattern {
     static Pattern atom = Pattern.compile("[a-z]+");
 
     @Override
-    public Map<String, Term> unify(Term queryTerm, PrologEnv env,  Map<String, Term> vars) throws UnificationFailureException {
+    public Solution unify(Term queryTerm, PrologEnv env, Map<String, Term> vars) throws UnificationFailureException {
         Unifier u = new Unifier(this, queryTerm, vars);
-        return u.next();
+        return u;
     }
 
     /**
