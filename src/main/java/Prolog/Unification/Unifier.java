@@ -1,10 +1,7 @@
 package Prolog.Unification;
 
 import Prolog.*;
-import Prolog.Unification.UnificationClauses.ClauseList;
-import Prolog.Unification.UnificationClauses.CompositeClauseCarrier;
-import Prolog.Unification.UnificationClauses.UnificationClause;
-import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
+import Prolog.Unification.UnificationClauses.*;
 
 import java.util.*;
 
@@ -72,9 +69,22 @@ public class Unifier implements Solution {
             Map<String, Term> out = RecursiveUnify(sub.substitute(tail));
             out.put(head.right.getName(), head.left);
             return out;
-        } else {
-            throw new UnificationFailureException();
+        } else if(head.right instanceof PList a && head.left instanceof PList b) {
+            if(a.isEmpty()) {
+                a.item = new PList(null);
+            }
+            if(b.isEmpty()) {
+                b.item = new PList(null);
+            }
+            if(!a.isEmpty() || !b.isEmpty()) {
+                tail.add(new UnificationClause(a.item, b.item));
+            }
+            if(a.hasNext() && b.hasNext()) {
+                tail.add(new UnificationClause(a.next, b.next));
+            }
+            return RecursiveUnify(tail);
         }
+        throw new UnificationFailureException();
     }
 
     @Override

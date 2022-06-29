@@ -3,7 +3,6 @@ package Prolog;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Rule extends PlPattern implements Solution {
@@ -15,10 +14,11 @@ public class Rule extends PlPattern implements Solution {
     Solution leftSol;
     Solution rightSol;
 
-    private PrologEnv env;
-    public Rule(Term left, Term right) {
+    private final PrologEnv env;
+    public Rule(Term left, Term right, PrologEnv env) {
         this.left = left;
         this.right = right;
+        this.env = env;
         name = left.name;
     }
 

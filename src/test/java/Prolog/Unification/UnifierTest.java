@@ -50,7 +50,7 @@ class UnifierTest {
     @Test
     void testUnifyListWithAtoms() {
         try {
-            Unifier u = new Unifier(Term.textToTerm("[dog,cat,mouse]"), Term.textToTerm("[dog,cat,mouse]"), new HashMap<>());
+            Unifier u = new Unifier(Term.textToTerm("[dog.cat.mouse]"), Term.textToTerm("[dog.cat.mouse]"), new HashMap<>());
             assertTrue(u.hasNext());
             assertEquals(u.next(), mgu);
         } catch (UnificationFailureException e) {
@@ -60,10 +60,10 @@ class UnifierTest {
 
     @Test
     void testUnifyListWithVariables() {
-        mgu.put("X", Term.textToTerm("[dog,cat,mouse]"));
+        mgu.put("X", Term.textToTerm("[dog.cat.mouse]"));
         mgu.put("Y", Term.textToTerm("[]"));
         try {
-            Unifier u = new Unifier(Term.textToTerm("[dog,cat,mouse]"), Term.textToTerm("[X,Y]"), new HashMap<>());
+            Unifier u = new Unifier(Term.textToTerm("[dog.cat.mouse]"), Term.textToTerm("[X.Y]"), new HashMap<>());
             assertTrue(u.hasNext());
             Map<String, Term> mgu2 = u.next();
             assertTrue(collectionEqual(mgu.values(), mgu2.values()));
@@ -75,10 +75,10 @@ class UnifierTest {
 
     @Test
     void testUnifyWithVariablesInCompound() {
-        mgu.put("X", Term.textToTerm("[dog,cat,mouse]"));
+        mgu.put("X", Term.textToTerm("[dog.cat.mouse]"));
         mgu.put("Y", Term.textToTerm("[]"));
         try {
-            Unifier u = new Unifier(Term.textToTerm("test([dog,cat,mouse])"), Term.textToTerm("test([X,Y])"), new HashMap<>());
+            Unifier u = new Unifier(Term.textToTerm("test([dog.cat.mouse])"), Term.textToTerm("test([X.Y])"), new HashMap<>());
             assertTrue(u.hasNext());
             Map<String, Term> mgu2 = u.next();
             assertTrue(collectionEqual(mgu.values(), mgu2.values()));
@@ -90,7 +90,7 @@ class UnifierTest {
 
     @Test
     void testReexecution() throws UnificationFailureException {
-        Unifier u = new Unifier(Term.textToTerm("[a,b]"), Term.textToTerm("[X,Y]"), new HashMap<>());
+        Unifier u = new Unifier(Term.textToTerm("[a.b]"), Term.textToTerm("[X.Y]"), new HashMap<>());
         Map<String, Term> s;
         assertTrue(u.hasNext());
         assertTrue(u.hasNext());
@@ -106,9 +106,9 @@ class UnifierTest {
 
     @Test
     public void testEmbeddedVariable() {
-        mgu.put("X", Term.textToTerm("[b]"));
-        PList test = (PList) Term.textToTerm("[a,b,c]");
-        Term out = Term.textToTerm("[a,X,c]");
+        mgu.put("X", Term.textToTerm("b"));
+        PList test = (PList) Term.textToTerm("[a.b.c]");
+        Term out = Term.textToTerm("[a.X.c]");
         try {
             Unifier u = new Unifier(test, out, new HashMap<>());
             assertTrue(u.hasNext());
@@ -126,7 +126,7 @@ class UnifierTest {
      */
     @Test
     public void testVariableCarryOver() throws UnificationFailureException {
-        PList test = (PList) Term.textToTerm("[a,X,c]");
+        PList test = (PList) Term.textToTerm("[a.X.c]");
         Term out = Term.textToTerm("X");
         Unifier u = new Unifier(test, out, new HashMap<>());
         assertTrue(u.hasNext());

@@ -15,8 +15,8 @@ class ListReexecutionTest {
 
     @Test
     public void testAtomReexecution() throws UnificationFailureException {
-        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[a,b,c]"),
-                (PList) Term.textToTerm("[a,b,c]"));
+        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[a.b.c]"),
+                (PList) Term.textToTerm("[a.b.c]"));
         assertTrue(reexec.hasNext());
         List<UnificationClause> s = reexec.next();
     }
@@ -24,7 +24,7 @@ class ListReexecutionTest {
     @Test
     public void testSingleVariable() throws UnificationFailureException {
         ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[X]"),
-                (PList) Term.textToTerm("[a,b,c]"));
+                (PList) Term.textToTerm("[a.b.c]"));
         assertTrue(reexec.hasNext());
         List<UnificationClause> s = reexec.next();
         assertFalse(reexec.hasNext());
@@ -32,14 +32,14 @@ class ListReexecutionTest {
 
     @Test
     public void testMultipleVariables() throws UnificationFailureException {
-        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[X,Y]"),
-                (PList) Term.textToTerm("[a,b]"));
+        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[X.Y]"),
+                (PList) Term.textToTerm("[a.b]"));
         assertTrue(reexec.hasNext());
-        List<UnificationClause> s = reexec.next(); //0,2
+        List<UnificationClause> s = reexec.next(); //0.2
         assertTrue(reexec.hasNext());
-        s = reexec.next(); //1,1
+        s = reexec.next(); //1.1
         assertTrue(reexec.hasNext());
-        s = reexec.next(); //2,0
+        s = reexec.next(); //2.0
         assertFalse(reexec.hasNext());
     }
 

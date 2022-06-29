@@ -14,25 +14,34 @@ import java.util.List;
 
 public class Compound extends Term {
 
-    public Term[] values;
+    public PList values;
+    private int length;
 
     public Compound(String name, Term[] values) {
         this.name = name;
-        this.values = values;
+        this.values = new PList(null);
+        length = values.length;
+        for(Term t : values) {
+            this.values.setNext(new PList(t));
+        }
     }
 
     @Override
     public String toString() {
-        return name + "(" + Arrays.toString(values) + ")";
+        return name + "(" + (values) + ")";
     }
 
     @Override
     public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
         if(other instanceof Compound otherC) {
-            if(otherC.values.length == values.length) {
+            if(((Compound) other).length == length) {
                 ArrayList<UnificationClauseCarrier> out = new ArrayList<>();
-                for (int i = 0; i < values.length; i++) {
-                    out.add((otherC.values[i].generateClauses(values[i])));
+                PList a = values;
+                PList b = otherC.values;
+                while(!a.isEmpty()){
+                    out.add((a.item.generateClauses(b.item)));
+                    a = a.next;
+                    b = b.next;
                 }
                 return new CompositeClauseCarrier(out);
             }
@@ -44,23 +53,21 @@ public class Compound extends Term {
     public boolean equals(Term other) {
         boolean out = true;
         if(other instanceof Compound a) {
-            out = a.name.equals(name);
-            if(a.values.length != values.length) {
+            if(!a.name.equals(name)) {
                 return false;
             }
-            for (int i = 0; i < values.length; i++) {
-                if(!values[i].equals(a.values[i])) {
-                    return false;
-                }
+            if(a.length != length) {
+                return false;
             }
+            return values.equals(a.values);
         }
         return out;
     }
     
     @Override
     public boolean contains(Term c) {
-        for (Term t:
-             values) {
+        for (PList it = values; !it.isEmpty(); ) {
+            Term t = it.item; it = it.next;
             if(t.equals(c)) {
                 return true;
             }

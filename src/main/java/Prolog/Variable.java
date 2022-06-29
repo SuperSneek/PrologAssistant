@@ -36,7 +36,7 @@ public class Variable extends Term{
     @Override
     public boolean equals(Term o) {
         if(o instanceof Variable l) {
-            return l.name.equals(name);
+            return l.name.equals(name) && !name.equals("_");
         }
         return false;
     }

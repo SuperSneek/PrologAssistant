@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-public class PList extends Term {
+public class PList extends Term implements Iterator<PList> {
 
     public PList next;
     public Term item;
@@ -29,6 +29,15 @@ public class PList extends Term {
         }
     }
 
+    public void setNext(PList next) {
+        if(item == null) {
+            item = next.item;
+            this.next = next.next;
+        } else {
+            this.next = next;
+        }
+    }
+
     public static PList fromQueue(Stack<Term> terms) {
         if(terms.isEmpty()) {
             return new PList(null, null);
@@ -41,6 +50,11 @@ public class PList extends Term {
             return false;
         }
         return next.item != null;
+    }
+
+    @Override
+    public PList next() {
+        return next;
     }
 
     public Term head() {

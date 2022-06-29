@@ -1,19 +1,28 @@
 package Prolog;
 
 import Prolog.Unification.UnificationFailureException;
-import Prolog.Unification.Unifier;
 
-import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
-import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class PrologEnv extends Thread {
 
 
     List<PlPattern> loadedPatterns = new LinkedList<>();
 
-    public void LoadModule(File file) {
-
+    public void LoadModule(URL path) {
+        try (Stream<String> stream = Files.lines(Path.of(path.toURI()))) {
+            stream.forEach(this::LoadPattern);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void LoadPattern(String input) {

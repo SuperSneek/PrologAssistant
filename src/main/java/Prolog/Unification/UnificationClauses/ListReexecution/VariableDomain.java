@@ -58,7 +58,11 @@ public class VariableDomain extends UnificationClauseCarrier {
         for (int i = 0; i < solution.length; i++) {
             PList piece = outList.take(solution[i]);
             outList = outList.drop(solution[i]);
-            out.add(new UnificationClause(variables.get(i), piece));
+            if(solution[i] == 1) {
+                out.add(new UnificationClause(variables.get(i), piece.item));
+            } else {
+                out.add(new UnificationClause((variables.get(i)), piece));
+            }
         }
         return out;
     }

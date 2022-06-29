@@ -2,7 +2,6 @@ package Prolog;
 
 import Prolog.Unification.UnificationFailureException;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +22,7 @@ public abstract class PlPattern {
         if (ruleMatcher.find()) {
             Term left = Term.textToTerm(ruleMatcher.group(1));
             Term right = Term.textToTerm(ruleMatcher.group(2));
-            return new Rule(left, right);
+            return new Rule(left, right, env);
         } else {
             return Term.textToTerm(input);
         }
