@@ -50,4 +50,40 @@ class QueryTest {
         assertFalse(q.hasNext());
     }
 
+    @Test
+    public void testMember() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("member([A.B.C],B)");
+        Query q = env.Query(Term.textToTerm("member([cat.dog.goose],[dog])"));
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+    }
+
+    @Test
+    public void testEmptyListReexec() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("test([A.B],A)");
+        Query q = env.Query(Term.textToTerm("test([a.b],[a.b])"));
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+    }
+
+    @Test
+    public void testRecursion() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("test([])");
+        env.LoadPattern("test([A.B]):-test(B)");
+        Query q = env.Query(Term.textToTerm("test([a.b.a.b])"));
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+        assertTrue(q.hasNext());
+        assertNotNull(q.next());
+        assertFalse(q.hasNext());
+    }
 }

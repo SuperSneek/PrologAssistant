@@ -9,7 +9,6 @@ import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Variable;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +18,7 @@ import java.util.List;
  * This class takes two lists and creates an iterator which produces ALL the different permutations of variables that
  * might unify those two lists
  */
-public class ListReexecution extends UnificationClauseCarrier {
+public class ListReexecution {
 
 
     /**
@@ -32,12 +31,15 @@ public class ListReexecution extends UnificationClauseCarrier {
     private PList leftRemaining;
     private PList rightRemaining;
 
-    public ListReexecution(PList left, PList right) throws UnificationFailureException {
+    public UnificationClauseCarrier generateCarrier(PList left, PList right) throws UnificationFailureException {
         leftRemaining = left;
         rightRemaining = right;
         parse();
         clean();
-        current = new CompositeClauseCarrier(domainList);
+        if(domainList.size() == 1) {
+            return domainList.get(0);
+        }
+        return new CompositeClauseCarrier(domainList);
     }
 
     private void clean() {
@@ -52,6 +54,9 @@ public class ListReexecution extends UnificationClauseCarrier {
                 VariableDomain a = (VariableDomain) domainList.get(i);
                 VariableDomain b = (VariableDomain) domainList.get(i+1);
                 newDomain.add(a.merge(b));
+                if(i+1< domainList.size()) {
+                    newDomain.addAll(domainList.subList(i+2, domainList.size()));
+                }
                 break;
             } else {
                 newDomain.add(domainList.get(i));
@@ -68,12 +73,12 @@ public class ListReexecution extends UnificationClauseCarrier {
 
     public void parse() throws UnificationFailureException {
         while(!leftRemaining.isEmpty() || !rightRemaining.isEmpty()) {
-            if(leftRemaining.item instanceof Variable var) {
+            if(leftRemaining.getItem() instanceof Variable var) {
                 leftRemaining = leftRemaining.next;
-                rightRemaining = parseVariables(rightRemaining, leftRemaining.item, var);
-            } else if(rightRemaining.item instanceof Variable var) {
+                rightRemaining = parseVariables(rightRemaining, leftRemaining.getItem(), var);
+            } else if(rightRemaining.getItem() instanceof Variable var) {
                 rightRemaining = rightRemaining.next;
-                leftRemaining = parseVariables(leftRemaining, rightRemaining.item, var);
+                leftRemaining = parseVariables(leftRemaining, rightRemaining.getItem(), var);
             }else {
                 parseOtherTerms();
             }
@@ -93,10 +98,10 @@ public class ListReexecution extends UnificationClauseCarrier {
     private PList parseVariables(PList termList, Term listEnd, Variable variable) {
         PList list = new PList(null);
         while(!termList.isEmpty()) {
-            if(termList.item.equals(listEnd)) {
+            if(termList.getItem().equals(listEnd)) {
                 break;
             }
-            list = new PList(termList.item, list);
+            list = new PList(termList.getItem(), list);
             termList = termList.next;
         }
         domainList.add(new VariableDomain(List.of(variable), list.reverse()));
@@ -106,22 +111,12 @@ public class ListReexecution extends UnificationClauseCarrier {
     private void parseOtherTerms() {
         List<UnificationClause> clauses = new ArrayList<>();
         while(!leftRemaining.isEmpty() && !rightRemaining.isEmpty()
-                && !(leftRemaining.item instanceof Variable) &&
-                !(rightRemaining.item instanceof Variable)) {
-            clauses.add(new UnificationClause(leftRemaining.item, rightRemaining.item));
+                && !(leftRemaining.getItem() instanceof Variable) &&
+                !(rightRemaining.getItem() instanceof Variable)) {
+            clauses.add(new UnificationClause(leftRemaining.getItem(), rightRemaining.getItem()));
             leftRemaining = leftRemaining.next;
             rightRemaining = rightRemaining.next;
         }
         domainList.add(new ClauseList(clauses));
-    }
-
-    @Override
-    public boolean hasNext() {
-        return current.hasNext();
-    }
-
-    @Override
-    public List<UnificationClause> next() {
-        return current.next();
     }
 }

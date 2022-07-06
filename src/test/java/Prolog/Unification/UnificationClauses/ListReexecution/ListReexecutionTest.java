@@ -3,6 +3,7 @@ package Prolog.Unification.UnificationClauses.ListReexecution;
 import Prolog.PList;
 import Prolog.Term;
 import Prolog.Unification.UnificationClauses.UnificationClause;
+import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ class ListReexecutionTest {
 
     @Test
     public void testAtomReexecution() throws UnificationFailureException {
-        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[a.b.c]"),
+        UnificationClauseCarrier reexec = new ListReexecution().generateCarrier((PList) Term.textToTerm("[a.b.c]"),
                 (PList) Term.textToTerm("[a.b.c]"));
         assertTrue(reexec.hasNext());
         List<UnificationClause> s = reexec.next();
@@ -23,7 +24,7 @@ class ListReexecutionTest {
 
     @Test
     public void testSingleVariable() throws UnificationFailureException {
-        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[X]"),
+        UnificationClauseCarrier reexec = new ListReexecution().generateCarrier((PList) Term.textToTerm("[X]"),
                 (PList) Term.textToTerm("[a.b.c]"));
         assertTrue(reexec.hasNext());
         List<UnificationClause> s = reexec.next();
@@ -32,7 +33,7 @@ class ListReexecutionTest {
 
     @Test
     public void testMultipleVariables() throws UnificationFailureException {
-        ListReexecution reexec = new ListReexecution((PList) Term.textToTerm("[X.Y]"),
+        UnificationClauseCarrier reexec = new ListReexecution().generateCarrier((PList) Term.textToTerm("[X.Y]"),
                 (PList) Term.textToTerm("[a.b]"));
         assertTrue(reexec.hasNext());
         List<UnificationClause> s = reexec.next(); //0.2

@@ -46,7 +46,7 @@ public class Unifier implements Solution {
             return new HashMap<>();
         }
         UnificationClause head = clauses.get(0);
-        List<UnificationClause> tail = clauses.subList(1,clauses.size());
+        List<UnificationClause> tail = new ArrayList<>(clauses.subList(1, clauses.size()));
         //Splitting functors into multiple clauses is already done in line Unify(...)
         if(head.left.equals(head.right)) {
            return RecursiveUnify(tail);
@@ -71,13 +71,13 @@ public class Unifier implements Solution {
             return out;
         } else if(head.right instanceof PList a && head.left instanceof PList b) {
             if(a.isEmpty()) {
-                a.item = new PList(null);
+                a.setItem(new PList(null));
             }
             if(b.isEmpty()) {
-                b.item = new PList(null);
+                b.setItem(new PList(null));
             }
             if(!a.isEmpty() || !b.isEmpty()) {
-                tail.add(new UnificationClause(a.item, b.item));
+                tail.add(new UnificationClause(a.getItem(), b.getItem()));
             }
             if(a.hasNext() && b.hasNext()) {
                 tail.add(new UnificationClause(a.next, b.next));

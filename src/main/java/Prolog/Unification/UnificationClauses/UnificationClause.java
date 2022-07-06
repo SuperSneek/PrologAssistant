@@ -8,4 +8,9 @@ public class UnificationClause {
     public Term left;
     public Term right;
 
+    @Override
+    public String toString() {
+        return "(" + left.toString() + " , " + right.toString() + ")";
+    }
+
 }

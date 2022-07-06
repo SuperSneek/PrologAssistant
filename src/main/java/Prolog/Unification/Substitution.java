@@ -4,7 +4,9 @@ import Prolog.Term;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class Substitution {
@@ -13,17 +15,24 @@ public class Substitution {
     Term target;
 
     public List<UnificationClause> substitute(List<UnificationClause> clauses) {
-        return clauses.stream().map(this::sub).toList();
+        ArrayList<UnificationClause> out = new ArrayList<>();
+        //TODO: Find out
+        for (UnificationClause clause : clauses) {
+            out.add(sub(clause));
+        }
+        return out;
     }
 
     private UnificationClause sub(UnificationClause clause) {
+        Term left = clause.left;
+        Term right = clause.right;
         if(clause.left.equals(source)) {
-            clause.left = target;
+            left = target;
         }
         if(clause.right.equals(source)) {
-            clause.right = target;
+            right = target;
         }
-        return clause;
+        return new UnificationClause(left, right);
     }
 
 }

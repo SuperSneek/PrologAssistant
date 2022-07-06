@@ -3,6 +3,7 @@ package Prolog.Unification.UnificationClauses;
 import Prolog.Term;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class SingleClause extends UnificationClauseCarrier {
     public List<UnificationClause> next() {
         boolean temp = returned;
         returned = true;
-        return temp ? null : List.of(clause);
+        ArrayList<UnificationClause> out = new ArrayList<>();
+        out.add(clause);
+        return temp ? null :out;
     }
 }

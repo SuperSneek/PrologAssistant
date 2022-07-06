@@ -1,21 +1,15 @@
 package Prolog;
 
-import Prolog.Unification.UnificationClauses.ClauseList;
 import Prolog.Unification.UnificationClauses.CompositeClauseCarrier;
-import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
-import Prolog.Unification.Unifier;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
 public class Compound extends Term {
 
     public PList values;
-    private int length;
+    private final int length;
 
     public Compound(String name, Term[] values) {
         this.name = name;
@@ -38,8 +32,8 @@ public class Compound extends Term {
                 ArrayList<UnificationClauseCarrier> out = new ArrayList<>();
                 PList a = values;
                 PList b = otherC.values;
-                while(!a.isEmpty()){
-                    out.add((a.item.generateClauses(b.item)));
+                while(!a.isEmpty() && !b.isEmpty()){
+                    out.add((a.getItem().generateClauses(b.getItem())));
                     a = a.next;
                     b = b.next;
                 }
@@ -67,7 +61,7 @@ public class Compound extends Term {
     @Override
     public boolean contains(Term c) {
         for (PList it = values; !it.isEmpty(); ) {
-            Term t = it.item; it = it.next;
+            Term t = it.getItem(); it = it.next;
             if(t.equals(c)) {
                 return true;
             }

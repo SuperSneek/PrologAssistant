@@ -20,6 +20,7 @@ public class ClauseList extends UnificationClauseCarrier {
 
     @Override
     public List<UnificationClause> next() {
+        returned = true;
         return clauses;
     }
 }

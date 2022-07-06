@@ -1,11 +1,9 @@
 package Prolog.Unification.UnificationClauses.ListReexecution;
 
 import Prolog.PList;
-import Prolog.Unification.UnificationClauses.SingleClause;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Variable;
-import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +57,7 @@ public class VariableDomain extends UnificationClauseCarrier {
             PList piece = outList.take(solution[i]);
             outList = outList.drop(solution[i]);
             if(solution[i] == 1) {
-                out.add(new UnificationClause(variables.get(i), piece.item));
+                out.add(new UnificationClause(variables.get(i), piece.getItem()));
             } else {
                 out.add(new UnificationClause((variables.get(i)), piece));
             }

@@ -39,5 +39,10 @@ class PListTest {
         assertTrue(test.take(1).equals(Term.textToTerm("[a]")));
     }
 
+    @Test
+    public void isEmptyTest(){
+        assertTrue(new PList(null).isEmpty());
+    }
+
 
 }
