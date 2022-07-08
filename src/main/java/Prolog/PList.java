@@ -166,4 +166,17 @@ public class PList extends Term implements Iterator<PList> {
     public Term getItem() {
         return item;
     }
+
+    public Term[] toArray() {
+        Term[] out = new Term[length()];
+        if(isEmpty()) {
+            return out;
+        }
+        PList connection = this;
+        for (int j = 0; j < out.length; j++) {
+            out[j] = connection.item;
+            connection = connection.next();
+        }
+        return out;
+    }
 }

@@ -1,5 +1,6 @@
 package Prolog;
 
+import Prolog.Rule.Rule;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.Map;
@@ -21,7 +22,7 @@ public abstract class PlPattern {
         Matcher ruleMatcher = rule.matcher(input);
         if (ruleMatcher.find()) {
             Term left = Term.textToTerm(ruleMatcher.group(1));
-            Term right = Term.textToTerm(ruleMatcher.group(2));
+            PList right = (PList) Term.textToTerm(ruleMatcher.group(2));
             return new Rule(left, right, env);
         } else {
             return Term.textToTerm(input);

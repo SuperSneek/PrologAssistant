@@ -1,3 +1,4 @@
-member([A.B.C],B)
-pattern([where.X],B):-member(X,markus)
+member(B,[A.B.C])
+known(markus,einkaufen)
+pattern([where.X],B):-[member(Y,X).known(Y,B)]
 
