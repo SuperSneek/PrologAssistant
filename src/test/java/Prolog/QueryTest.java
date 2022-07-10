@@ -68,22 +68,22 @@ class QueryTest {
         assertNotNull(q.next());
     }
 
-   // @Test
-   // public void testRecursion() throws UnificationFailureException {
-   //     PrologEnv env = new PrologEnv();
-   //     env.LoadPattern("test([])");
-   //     env.LoadPattern("test([A.B]):-[test(B)]");
-   //     Query q = env.Query(Term.textToTerm("test([a.b.a.b])"));
-   //     assertTrue(q.hasNext());
-   //     assertNotNull(q.next());
-   //     assertTrue(q.hasNext());
-   //     assertNotNull(q.next());
-   //     assertTrue(q.hasNext());
-   //     assertNotNull(q.next());
-   //     assertTrue(q.hasNext());
-   //     assertNotNull(q.next());
-   //     assertTrue(q.hasNext());
-   //     assertNotNull(q.next());
-   //     assertFalse(q.hasNext());
-   // }
+    @Test
+    public void testManyQueries() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("test");
+        env.Query(Term.textToTerm("test")).next();
+        assertNotNull( env.Query(Term.textToTerm("test")).next());
+        assertNotNull( env.Query(Term.textToTerm("test")).next());
+        assertNotNull( env.Query(Term.textToTerm("test")).next());
+    }
+
+    @Test
+    public void testMemberReexec() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("member(B,[A.B.C])");
+        env.LoadPattern("known(markus,einkaufen)");
+        env.LoadPattern("pattern([where.X],B):-[member(Y,X).known(Y,B)]");
+        assertNotNull(env.Query(Term.textToTerm("pattern([where.markus],B)")).next());
+    }
 }

@@ -20,6 +20,18 @@ class RuleTest {
     }
 
     @Test
+    public void testRuleReexec() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("test(X):-[cat(X).dog(X)]");
+        env.LoadPattern("cat(dog)");
+        env.LoadPattern("dog(dog)");
+        env.LoadPattern("dog(Y)");
+        Query q = env.Query(Term.textToTerm("test(dog)"));
+        assertNotNull(q.next());
+        assertNotNull(q.next());
+    }
+
+    @Test
     public void testRuleFailure() throws UnificationFailureException {
         PrologEnv env = new PrologEnv();
         env.LoadPattern("test(X):-[cat(X)]");
@@ -33,7 +45,6 @@ class RuleTest {
         PrologEnv env = new PrologEnv();
         env.LoadPattern("test(X):-[cat(X)]");
         env.LoadPattern("cat(mouse)");
-        Query q = env.Query(Term.textToTerm("test(mouse)"));
         assertNotNull(env.Query(Term.textToTerm("test(mouse)")).next());
     }
 

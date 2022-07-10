@@ -63,9 +63,13 @@ public class Rule extends PlPattern implements Solution {
     public Map<String, Term> next() {
         //Find inital variable
         Map<String, Term> out = leftS;
-
+        int index = 0;
         try {
-            return calculateNextRecursion(out, 0);
+            try {
+                return calculateNextRecursion(out, index);
+            } catch (UnificationFailureException e) {
+                return calculateNextRecursion(out, index);
+            }
         } catch (UnificationFailureException e) {
             if(leftSol.hasNext()) {
                 leftSol.next();
@@ -87,6 +91,7 @@ public class Rule extends PlPattern implements Solution {
         if(result == null) {
             throw new UnificationFailureException();
         }
+        if()
         vars.putAll(result);
         try {
             return calculateNextRecursion(vars, index + 1);
