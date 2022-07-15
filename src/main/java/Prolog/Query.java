@@ -47,7 +47,7 @@ public class Query implements Solution {
 
     @Override
     public boolean hasNext() {
-        return patternIterator.hasNext() || current.hasNext();
+        return patternIterator.hasNext() || current.hasNext() || query instanceof Not;
     }
 
     @Override
@@ -57,8 +57,14 @@ public class Query implements Solution {
             if(result == null) {
                 throw new UnificationFailureException();
             }
+            if(query instanceof Not) {
+                return null;
+            }
             return result;
         } catch (UnificationFailureException e) {
+            if(query instanceof Not) {
+                return new HashMap<>();
+            }
             if(patternIterator.hasNext()) {
                 return next();
             } else {

@@ -18,11 +18,13 @@ public abstract class Term extends PlPattern {
 
     public String getName() {return name;}
 
-
+    static Pattern not = Pattern.compile("(not)\\((.+)\\)");
     static Pattern compound = Pattern.compile("([a-z]+)\\((.+)\\)");
     static Pattern list = Pattern.compile("\\[([^.]+\\.?)*\\]");
     static Pattern var = Pattern.compile("(?:[A-Z]|_)+");
     static Pattern atom = Pattern.compile("[a-z]+");
+
+
 
     @Override
     public Solution unify(Term queryTerm, PrologEnv env, Map<String, Term> vars) throws UnificationFailureException {
@@ -40,7 +42,11 @@ public abstract class Term extends PlPattern {
         Matcher varMatcher = var.matcher(input);
         Matcher atomMatcher = atom.matcher(input);
         Matcher listMatcher = list.matcher(input);
-        if(compoundMatcher.matches()) {
+        Matcher notMatcher = not.matcher(input);
+        if(notMatcher.matches()) {
+            return matchNot(notMatcher);
+        }
+        else if(compoundMatcher.matches()) {
             return matchCompound(compoundMatcher);
         } else if(listMatcher.matches()) {
             return matchList(listMatcher, input);
@@ -50,6 +56,11 @@ public abstract class Term extends PlPattern {
             return new Variable(input);
         }
         throw new IllegalArgumentException("Not a Term");
+    }
+
+    private static Term matchNot(Matcher notMatcher) {
+        String args = notMatcher.group(2);
+        return new Not(Term.textToTerm(args));
     }
 
     private static Compound matchCompound(Matcher compoundMatcher) {

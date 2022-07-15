@@ -47,8 +47,9 @@ public class Unifier implements Solution {
         }
         UnificationClause head = clauses.get(0);
         List<UnificationClause> tail = new ArrayList<>(clauses.subList(1, clauses.size()));
+
         //Splitting functors into multiple clauses is already done in line Unify(...)
-        if(head.left.equals(head.right)) {
+        if(head.left.equals(head.right) || head.right.equals(head.left)) {
            return RecursiveUnify(tail);
         } else if(head.left instanceof Variable var && !vars.contains(head.left.getName())) {
             vars.add(head.left.getName());

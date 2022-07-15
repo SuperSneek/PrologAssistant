@@ -1,6 +1,7 @@
 package Prolog.Rule;
 
 import Prolog.*;
+import Prolog.Unification.Substitution;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.Arrays;
@@ -91,7 +92,6 @@ public class Rule extends PlPattern implements Solution {
         if(result == null) {
             throw new UnificationFailureException();
         }
-        if()
         vars.putAll(result);
         try {
             return calculateNextRecursion(vars, index + 1);
@@ -99,4 +99,18 @@ public class Rule extends PlPattern implements Solution {
             return calculateNextRecursion(vars, index);
         }
     }
+
+    private Map<String, Term> reduced(Map<String, Term> toReduce, Map<String, Term> subs ) {
+        for(String key : subs.keySet()) {
+                for (String other:
+                     toReduce.keySet()) {
+                    if(other.equals(key)) {
+                       // toReduce.put(subs.get())
+                    }
+                }
+            Substitution sub = new Substitution(new Variable(key), subs.get(key));
+        }
+        return null;
+    }
+
 }
