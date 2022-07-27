@@ -78,7 +78,7 @@ public abstract class Term extends PlPattern {
     }
 
     private static PList matchList(Matcher listMatcher, String input) {
-        String content = input.replaceAll("\\[?\\]?", "");
+        String content = input.substring(1, input.length() - 1);
         String[] items;
         items = content.split("\\.");
         if(content.length() == 0) {

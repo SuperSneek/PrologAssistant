@@ -1,7 +1,1 @@
-test(Y):-[member(H,Y).member(J,Y).member(K,Y).single(H).single(J).single(K)]
-member(X,[A.X.B])
-single(a)
-single(b)
-single(c)
-single(d)
-single(e)
+test

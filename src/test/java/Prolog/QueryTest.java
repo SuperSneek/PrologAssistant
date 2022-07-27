@@ -79,11 +79,29 @@ class QueryTest {
     }
 
     @Test
+    public void testList() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("test(X):-[cat([X])]");
+        env.LoadPattern("cat([dog])");
+        assertNotNull(env.Query(Term.textToTerm("test(dog)")).next());
+    }
+
+    //IMPORTANT
+    @Test
+    public void catTest() throws UnificationFailureException {
+        PrologEnv env = new PrologEnv();
+        env.LoadPattern("member(B,[A.B.C])");
+        env.LoadPattern("valid(X)");
+        env.LoadPattern("test(X):-[valid(X).member(X,[cat])]");
+        assertNotNull(env.Query(Term.textToTerm("test(cat)")).next());
+    }
+
+    @Test
     public void testMemberReexec() throws UnificationFailureException {
         PrologEnv env = new PrologEnv();
         env.LoadPattern("member(B,[A.B.C])");
         env.LoadPattern("known(markus,einkaufen)");
-        env.LoadPattern("pattern([where.X],B):-[member(Y,X).known(Y,B)]");
-        assertNotNull(env.Query(Term.textToTerm("pattern([where.markus],B)")).next());
+        env.LoadPattern("pattern(I,Y):-[member(N,I).known(N,Y)]");
+        assertNotNull(env.Query(Term.textToTerm("pattern([where.is.markus],Y)")).next());
     }
 }

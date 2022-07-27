@@ -70,20 +70,6 @@ public class Unifier implements Solution {
             Map<String, Term> out = RecursiveUnify(sub.substitute(tail));
             out.put(head.right.getName(), head.left);
             return out;
-        } else if(head.right instanceof PList a && head.left instanceof PList b) {
-            if(a.isEmpty()) {
-                a.setItem(new PList(null));
-            }
-            if(b.isEmpty()) {
-                b.setItem(new PList(null));
-            }
-            if(!a.isEmpty() || !b.isEmpty()) {
-                tail.add(new UnificationClause(a.getItem(), b.getItem()));
-            }
-            if(a.hasNext() && b.hasNext()) {
-                tail.add(new UnificationClause(a.next, b.next));
-            }
-            return RecursiveUnify(tail);
         }
         throw new UnificationFailureException();
     }
