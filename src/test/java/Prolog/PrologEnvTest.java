@@ -1,5 +1,6 @@
 package Prolog;
 
+import Prolog.Terms.Term;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;

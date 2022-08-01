@@ -1,6 +1,6 @@
 package Prolog.Unification.UnificationClauses;
 
-import Prolog.Term;
+import Prolog.Terms.Term;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

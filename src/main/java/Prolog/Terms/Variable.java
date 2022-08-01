@@ -1,16 +1,13 @@
-package Prolog;
+package Prolog.Terms;
 
 
 import Prolog.Unification.UnificationClauses.SingleClause;
-import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
-import Prolog.Unification.Unifier;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
-public class Variable extends Term{
+public class Variable extends Term {
 
 
 
@@ -39,5 +36,15 @@ public class Variable extends Term{
             return l.name.equals(name) && !name.equals("_");
         }
         return false;
+    }
+
+    @Override
+    public Term substitute(Map<String, Term> vars) {
+        Term t = vars.get(name);
+        if(t == null) {
+            return this;
+        } else {
+            return t;
+        }
     }
 }

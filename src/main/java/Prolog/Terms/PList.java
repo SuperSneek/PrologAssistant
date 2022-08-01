@@ -1,10 +1,11 @@
-package Prolog;
+package Prolog.Terms;
 
 import Prolog.Unification.UnificationClauses.ListReexecution.ListReexecution;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Stack;
 
 public class PList extends Term implements Iterator<PList> {
@@ -106,6 +107,16 @@ public class PList extends Term implements Iterator<PList> {
             return out;
         }
        return false;
+    }
+
+    @Override
+    public Term substitute(Map<String, Term> vars) {
+        PList p = this;
+        while(!p.isEmpty()) {
+            p.setItem(p.getItem().substitute(vars));
+            p = p.next;
+        }
+        return this;
     }
 
     public boolean isEmpty() {

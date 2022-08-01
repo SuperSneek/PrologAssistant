@@ -1,12 +1,14 @@
 package Prolog.Rule;
 
 import Prolog.*;
+import Prolog.Terms.PList;
+import Prolog.Terms.Term;
+import Prolog.Terms.Variable;
 import Prolog.Unification.Substitution;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class Rule extends PlPattern implements Solution {
@@ -96,6 +98,10 @@ public class Rule extends PlPattern implements Solution {
         try {
             return calculateNextRecursion(vars, index + 1);
         } catch (UnificationFailureException e) {
+            for (String s:
+                 result.keySet()) {
+                vars.remove(s);
+            }
             return calculateNextRecursion(vars, index);
         }
     }

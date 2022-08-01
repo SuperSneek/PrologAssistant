@@ -1,10 +1,8 @@
 package Prolog.Unification.UnificationClauses;
 
-import Prolog.Term;
-import lombok.AllArgsConstructor;
+import Prolog.Terms.Term;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class SingleClause extends UnificationClauseCarrier {

@@ -1,10 +1,11 @@
-package Prolog;
+package Prolog.Terms;
 
 import Prolog.Unification.UnificationClauses.CompositeClauseCarrier;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Compound extends Term {
 
@@ -18,6 +19,11 @@ public class Compound extends Term {
         for(Term t : values) {
             this.values.setNext(new PList(t));
         }
+    }
+    public Compound(String name, PList p) {
+        values = p;
+        this.name = name;
+        length = p.length();
     }
 
     @Override
@@ -57,7 +63,13 @@ public class Compound extends Term {
         }
         return out;
     }
-    
+
+    @Override
+    public Term substitute(Map<String, Term> vars) {
+        values = (PList) values.substitute(vars);
+        return this;
+    }
+
     @Override
     public boolean contains(Term c) {
         for (PList it = values; !it.isEmpty(); ) {

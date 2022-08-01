@@ -1,6 +1,8 @@
 package Prolog.Unification;
 
 import Prolog.*;
+import Prolog.Terms.Term;
+import Prolog.Terms.Variable;
 import Prolog.Unification.UnificationClauses.*;
 
 import java.util.*;

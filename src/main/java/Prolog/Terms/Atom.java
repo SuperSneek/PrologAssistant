@@ -1,15 +1,11 @@
-package Prolog;
+package Prolog.Terms;
 
 import Prolog.Unification.UnificationClauses.SingleClause;
-import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
-import Prolog.Unification.UnificationFailureException;
-import Prolog.Unification.Unifier;
 
-import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
-public class Atom extends Term{
+public class Atom extends Term {
 
     public Atom(String name) {
         this.name = name;
@@ -31,5 +27,10 @@ public class Atom extends Term{
             return a.name.equals(name);
         }
         return false;
+    }
+
+    @Override
+    public Term substitute(Map<String, Term> vars) {
+        return this;
     }
 }

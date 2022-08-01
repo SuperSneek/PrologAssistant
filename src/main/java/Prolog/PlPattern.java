@@ -1,6 +1,9 @@
 package Prolog;
 
 import Prolog.Rule.Rule;
+import Prolog.Terms.PList;
+import Prolog.Terms.Term;
+import Prolog.Terms.Variable;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.Map;

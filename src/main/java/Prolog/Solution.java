@@ -1,5 +1,7 @@
 package Prolog;
 
+import Prolog.Terms.Term;
+
 import java.util.Iterator;
 import java.util.Map;
 

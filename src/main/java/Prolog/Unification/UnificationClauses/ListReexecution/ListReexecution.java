@@ -1,13 +1,13 @@
 package Prolog.Unification.UnificationClauses.ListReexecution;
 
-import Prolog.PList;
-import Prolog.Term;
+import Prolog.Terms.PList;
+import Prolog.Terms.Term;
 import Prolog.Unification.UnificationClauses.ClauseList;
 import Prolog.Unification.UnificationClauses.CompositeClauseCarrier;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
-import Prolog.Variable;
+import Prolog.Terms.Variable;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -1,7 +1,7 @@
 package Prolog.Unification.UnificationClauses.ListReexecution;
 
-import Prolog.PList;
-import Prolog.Term;
+import Prolog.Terms.PList;
+import Prolog.Terms.Term;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;

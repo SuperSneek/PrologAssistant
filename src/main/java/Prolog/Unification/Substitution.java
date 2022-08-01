@@ -1,12 +1,11 @@
 package Prolog.Unification;
 
-import Prolog.Term;
+import Prolog.Terms.Term;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class Substitution {

@@ -1,12 +1,12 @@
 package Prolog.Unification;
 
-import Prolog.PList;
-import Prolog.Term;
-import Prolog.Variable;
+import Prolog.Terms.PList;
+import Prolog.Terms.Term;
+import Prolog.Terms.Variable;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
-import Prolog.Atom;
+import Prolog.Terms.Atom;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;

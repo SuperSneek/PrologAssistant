@@ -1,9 +1,9 @@
 package Prolog.Unification.UnificationClauses.ListReexecution;
 
-import Prolog.PList;
+import Prolog.Terms.PList;
 import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
-import Prolog.Variable;
+import Prolog.Terms.Variable;
 
 import java.util.ArrayList;
 import java.util.List;

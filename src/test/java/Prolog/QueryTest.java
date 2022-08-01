@@ -1,5 +1,6 @@
 package Prolog;
 
+import Prolog.Terms.Term;
 import Prolog.Unification.UnificationFailureException;
 import org.junit.jupiter.api.Test;
 

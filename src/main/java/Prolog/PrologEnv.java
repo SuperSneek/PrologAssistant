@@ -1,5 +1,6 @@
 package Prolog;
 
+import Prolog.Terms.*;
 import Prolog.Unification.UnificationFailureException;
 
 import java.io.IOException;

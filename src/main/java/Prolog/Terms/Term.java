@@ -1,5 +1,8 @@
-package Prolog;
+package Prolog.Terms;
 
+import Prolog.PlPattern;
+import Prolog.PrologEnv;
+import Prolog.Solution;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 import Prolog.Unification.Unifier;
@@ -8,13 +11,15 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public abstract class Term extends PlPattern {
+public abstract class Term extends PlPattern implements Cloneable{
 
     public abstract String toString();
 
     public abstract UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException;
 
     public abstract boolean equals(Term other);
+
+    public abstract Term substitute(Map<String, Term> vars);
 
     public String getName() {return name;}
 
@@ -61,6 +66,15 @@ public abstract class Term extends PlPattern {
     private static Term matchNot(Matcher notMatcher) {
         String args = notMatcher.group(2);
         return new Not(Term.textToTerm(args));
+    }
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     private static Compound matchCompound(Matcher compoundMatcher) {

@@ -1,11 +1,11 @@
 package Prolog;
 
+import Prolog.Terms.Not;
+import Prolog.Terms.Term;
 import Prolog.Unification.UnificationFailureException;
-import Prolog.Unification.Unifier;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class Query implements Solution {
@@ -29,7 +29,8 @@ public class Query implements Solution {
         //TODO: multithread
         patternIterator = env.findMatchingPatterns(queryTerm);
         this.env = env;
-        this.query = queryTerm;
+        Term temp = (Term) queryTerm.clone();
+        this.query = temp.substitute(vars);
         this.vars = vars;
     }
 

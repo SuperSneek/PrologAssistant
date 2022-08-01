@@ -1,10 +1,8 @@
 import Prolog.PrologEnv;
 import Prolog.Query;
-import Prolog.Term;
+import Prolog.Terms.Term;
 import Prolog.Unification.UnificationFailureException;
 
-import java.io.Console;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 import java.util.Scanner;
