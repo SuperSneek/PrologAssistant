@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public abstract class Term extends PlPattern implements Cloneable{
+public abstract class Term extends PlPattern {
 
     public abstract String toString();
 
@@ -66,15 +66,6 @@ public abstract class Term extends PlPattern implements Cloneable{
     private static Term matchNot(Matcher notMatcher) {
         String args = notMatcher.group(2);
         return new Not(Term.textToTerm(args));
-    }
-
-    @Override
-    public Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
     }
 
     private static Compound matchCompound(Matcher compoundMatcher) {

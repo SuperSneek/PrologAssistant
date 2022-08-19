@@ -31,6 +31,6 @@ public class Atom extends Term {
 
     @Override
     public Term substitute(Map<String, Term> vars) {
-        return this;
+        return new Atom(name);
     }
 }

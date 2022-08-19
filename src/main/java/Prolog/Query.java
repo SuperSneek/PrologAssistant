@@ -29,8 +29,7 @@ public class Query implements Solution {
         //TODO: multithread
         patternIterator = env.findMatchingPatterns(queryTerm);
         this.env = env;
-        Term temp = (Term) queryTerm.clone();
-        this.query = temp.substitute(vars);
+        this.query = queryTerm.substitute(vars);
         this.vars = vars;
     }
 

@@ -66,8 +66,8 @@ public class Compound extends Term {
 
     @Override
     public Term substitute(Map<String, Term> vars) {
-        values = (PList) values.substitute(vars);
-        return this;
+        PList p = (PList) values.substitute(vars);
+        return new Compound(name, p);
     }
 
     @Override

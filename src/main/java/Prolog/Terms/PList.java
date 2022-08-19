@@ -111,12 +111,15 @@ public class PList extends Term implements Iterator<PList> {
 
     @Override
     public Term substitute(Map<String, Term> vars) {
-        PList p = this;
-        while(!p.isEmpty()) {
-            p.setItem(p.getItem().substitute(vars));
+        PList p = new PList(null);
+        PList out = p;
+        PList iter = this;
+        while(!iter.isEmpty()) {
+            p.setItem(iter.getItem().substitute(vars));
+            iter = iter.next;
             p = p.next;
         }
-        return this;
+        return out;
     }
 
     public boolean isEmpty() {

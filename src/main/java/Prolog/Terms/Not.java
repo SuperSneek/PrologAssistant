@@ -32,6 +32,6 @@ public class Not extends Term {
     @Override
     public Term substitute(Map<String, Term> vars) {
         subject = subject.substitute(vars);
-        return this;
+        return new Not(subject);
     }
 }
