@@ -22,9 +22,6 @@ public class PList extends Term implements Iterator<PList> {
     public PList(Term term) {
         this.name = "List";
         this.setItem(term);
-        if(term != null) {
-            this.next = new PList(null);
-        }
     }
 
     public void setItem(Term item) {
@@ -34,6 +31,9 @@ public class PList extends Term implements Iterator<PList> {
             }
         }
         this.item = item;
+        if(!hasNext() && this.item != null) {
+            next = new PList(null);
+        }
     }
 
     public void setNext(PList next) {
@@ -117,7 +117,8 @@ public class PList extends Term implements Iterator<PList> {
         while(!iter.isEmpty()) {
             p.setItem(iter.getItem().substitute(vars));
             iter = iter.next;
-            p = p.next;
+            if(!p.isEmpty())
+                p = p.next;
         }
         return out;
     }

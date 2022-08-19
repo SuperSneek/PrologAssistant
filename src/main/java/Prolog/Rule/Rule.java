@@ -20,6 +20,9 @@ public class Rule extends PlPattern implements Solution {
     Solution leftSol;
     Solution[] rightSol;
 
+    Map<String, Term> vars;
+    int index = 0;
+
     private final PrologEnv env;
     public Rule(Term left, PList right, PrologEnv env) {
         this.left = left;
@@ -69,9 +72,9 @@ public class Rule extends PlPattern implements Solution {
         int index = 0;
         try {
             try {
-                return calculateNextRecursion(out, index);
+                return calculateNextRecursion(out);
             } catch (UnificationFailureException e) {
-                return calculateNextRecursion(out, index);
+                return calculateNextRecursion(out);
             }
         } catch (UnificationFailureException e) {
             if(leftSol.hasNext()) {
@@ -83,7 +86,7 @@ public class Rule extends PlPattern implements Solution {
         return null;
     }
 
-    private Map<String, Term> calculateNextRecursion(Map<String, Term> vars, int index) throws UnificationFailureException {
+    private Map<String, Term> calculateNextRecursion(Map<String, Term> vars) throws UnificationFailureException {
         if(index == right.length) {
             return vars;
         }
@@ -92,31 +95,20 @@ public class Rule extends PlPattern implements Solution {
         }
         Map<String, Term> result = rightSol[index].next();
         if(result == null) {
+            index--;
             throw new UnificationFailureException();
         }
         vars.putAll(result);
         try {
-            return calculateNextRecursion(vars, index + 1);
+            index++;
+            return calculateNextRecursion(vars);
         } catch (UnificationFailureException e) {
             for (String s:
                  result.keySet()) {
                 vars.remove(s);
             }
-            return calculateNextRecursion(vars, index);
+            return calculateNextRecursion(vars);
         }
-    }
-
-    private Map<String, Term> reduced(Map<String, Term> toReduce, Map<String, Term> subs ) {
-        for(String key : subs.keySet()) {
-                for (String other:
-                     toReduce.keySet()) {
-                    if(other.equals(key)) {
-                       // toReduce.put(subs.get())
-                    }
-                }
-            Substitution sub = new Substitution(new Variable(key), subs.get(key));
-        }
-        return null;
     }
 
 }
