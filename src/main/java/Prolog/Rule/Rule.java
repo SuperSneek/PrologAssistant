@@ -3,8 +3,6 @@ package Prolog.Rule;
 import Prolog.*;
 import Prolog.Terms.PList;
 import Prolog.Terms.Term;
-import Prolog.Terms.Variable;
-import Prolog.Unification.Substitution;
 import Prolog.Unification.UnificationFailureException;
 
 import java.util.Arrays;
@@ -20,7 +18,6 @@ public class Rule extends PlPattern implements Solution {
     Solution leftSol;
     Solution[] rightSol;
 
-    Map<String, Term> vars;
     int index = 0;
 
     private final PrologEnv env;
@@ -28,6 +25,9 @@ public class Rule extends PlPattern implements Solution {
         this.left = left;
         this.right = right.toArray();
         rightSol = new Solution[this.right.length];
+        for (int i = 0; i < rightSol.length; i++) {
+            rightSol[i] = new EmptySolution();
+        }
         this.env = env;
         name = left.getName();
     }
@@ -41,6 +41,7 @@ public class Rule extends PlPattern implements Solution {
     public Solution unify(Term queryTerm, PrologEnv env, Map<String, Term> vars) throws UnificationFailureException {
         leftSol = left.unify(queryTerm, env, vars);
         leftS = leftSol.next();
+        GenerateNode(leftS);
         return this;
     }
 
@@ -55,7 +56,7 @@ public class Rule extends PlPattern implements Solution {
     private boolean rightSolHasNext() {
         for (Solution s:
                 rightSol) {
-            if(s == null) {
+            if(s instanceof EmptySolution) {
                 return true;
             }
             if(s.hasNext()) {
@@ -69,15 +70,11 @@ public class Rule extends PlPattern implements Solution {
     public Map<String, Term> next() {
         //Find inital variable
         Map<String, Term> out = leftS;
-        int index = 0;
         try {
-            try {
-                return calculateNextRecursion(out);
-            } catch (UnificationFailureException e) {
-                return calculateNextRecursion(out);
-            }
+            return calculateNextRecursion(out);
         } catch (UnificationFailureException e) {
             if(leftSol.hasNext()) {
+                index = 0;
                 leftSol.next();
                 return next();
             }
@@ -87,28 +84,76 @@ public class Rule extends PlPattern implements Solution {
     }
 
     private Map<String, Term> calculateNextRecursion(Map<String, Term> vars) throws UnificationFailureException {
+
+
+        Map<String, Term> newVars = (DescendLayer(vars));
         if(index == right.length) {
-            return vars;
+            AscendLayer();
+            return newVars;
+        } else {
+            GenerateNode(newVars);
+            try {
+                return calculateNextRecursion(newVars);
+            } catch (UnificationFailureException e) {
+                AscendLayer();
+                return calculateNextRecursion(vars);
+            }
         }
-        if(rightSol[index] == null || !rightSol[index].hasNext()) {
-            rightSol[index] = env.Query(right[index], vars);
-        }
-        Map<String, Term> result = rightSol[index].next();
-        if(result == null) {
-            index--;
+
+
+        //if(rightSol[index] == null || !rightSol[index].hasNext()) {
+        //    rightSol[index] = env.Query(right[index], vars);
+        //}
+        //Map<String, Term> result = rightSol[index].next();
+        //if(result == null) {
+        //    index--;
+        //    throw new UnificationFailureException();
+        //} else {
+        //    index++;
+        //}
+        //vars.putAll(result);
+        //try {
+        //    index++;
+        //    return calculateNextRecursion(vars);
+        //} catch (UnificationFailureException e) {
+        //    for (String s:
+        //         result.keySet()) {
+        //        vars.remove(s);
+        //    }
+        //    return calculateNextRecursion(vars);
+        //}
+    }
+
+    /**
+     * This method is used to generate a new node in the depth search algorithm
+     * @throws UnificationFailureException a node cannot be generated with the present variables
+     */
+    private void GenerateNode(Map<String, Term> vars) throws UnificationFailureException {
+        rightSol[index] = env.Query(right[index], vars);
+
+    }
+
+    /**
+     * Should no solution be found in the current branch of our solution tree depth search
+     * we can ascend back and try to find a new solution
+     */
+    private void AscendLayer() {
+        index--;
+    }
+
+    /**
+     * When a new solution has been gereated from a node, we can simply descend without any extra steps
+     */
+    private Map<String, Term> DescendLayer(Map<String, Term> vars) throws UnificationFailureException {
+        Map<String, Term> newVars = rightSol[index].next();
+        if(newVars == null) {
             throw new UnificationFailureException();
         }
-        vars.putAll(result);
-        try {
-            index++;
-            return calculateNextRecursion(vars);
-        } catch (UnificationFailureException e) {
-            for (String s:
-                 result.keySet()) {
-                vars.remove(s);
-            }
-            return calculateNextRecursion(vars);
-        }
+        newVars.putAll(vars);
+        index++;
+        return newVars;
     }
+
+
 
 }
