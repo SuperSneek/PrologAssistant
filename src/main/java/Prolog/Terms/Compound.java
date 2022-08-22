@@ -39,7 +39,7 @@ public class Compound extends Term {
                 PList a = values;
                 PList b = otherC.values;
                 while(!a.isEmpty() && !b.isEmpty()){
-                    out.add((a.getItem().generateClauses(b.getItem())));
+                    out.add(ClauseGenerator.generateClauses(a.getItem(),b.getItem()));
                     a = a.next;
                     b = b.next;
                 }

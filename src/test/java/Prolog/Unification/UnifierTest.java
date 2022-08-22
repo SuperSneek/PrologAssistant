@@ -134,6 +134,20 @@ class UnifierTest {
         assertFalse(u.hasNext());
     }
 
+    /**
+     * This test makes sure that variables are
+     * @throws UnificationFailureException If something very unexpected goes wrong
+     */
+    @Test
+    public void testGenerateClauses() throws UnificationFailureException {
+        PList test = (PList) Term.textToTerm("[a.X.c]");
+        Term out = Term.textToTerm("X");
+        Unifier u = new Unifier(test, out, new HashMap<>());
+        assertTrue(u.hasNext());
+        assertNull(u.next());
+        assertFalse(u.hasNext());
+    }
+
 
     private <Term> boolean collectionEqual(Collection<Term> a, Collection<Term> b) {
         for (Term item:

@@ -1,6 +1,7 @@
 package Prolog.Unification;
 
 import Prolog.*;
+import Prolog.Terms.ClauseGenerator;
 import Prolog.Terms.Term;
 import Prolog.Terms.Variable;
 import Prolog.Unification.UnificationClauses.*;
@@ -22,11 +23,7 @@ public class Unifier implements Solution {
     public Unifier(Term X, Term Y, Map<String, Term> vars) throws UnificationFailureException {
         subs = createExternalVars(vars);
         externalvars.addAll(vars.keySet());
-        try {
-            carrier = X.generateClauses(Y);
-        } catch (UnificationFailureException e) {
-            carrier = Y.generateClauses(X);
-        }
+        carrier = ClauseGenerator.generateClauses(X, Y);
     }
 
     private List<Substitution> createExternalVars(Map<String, Term> vars) {

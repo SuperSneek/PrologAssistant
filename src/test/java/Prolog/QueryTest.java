@@ -103,8 +103,10 @@ class QueryTest {
         env.LoadPattern("member(B,[A.B.C])");
         env.LoadPattern("known(markus,einkaufen)");
         env.LoadPattern("pattern(I,Y):-[member(N,I).known(N,Y)]");
+        env.LoadPattern("pattern(I,[idk])");
         Query q = env.Query(Term.textToTerm("pattern([where.is.markus],Y)"));
         assertNotNull(q.next());
+        assertTrue(q.next().get("Y").equals(Term.textToTerm("[idk]")));
         assertNull(q.next());
     }
 }

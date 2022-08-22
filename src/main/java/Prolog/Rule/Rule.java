@@ -73,6 +73,10 @@ public class Rule extends PlPattern implements Solution {
         try {
             return calculateNextRecursion(out);
         } catch (UnificationFailureException e) {
+            if(index > 0) {
+                AscendLayer();
+                return next();
+            }
             if(leftSol.hasNext()) {
                 index = 0;
                 leftSol.next();
@@ -99,29 +103,6 @@ public class Rule extends PlPattern implements Solution {
                 return calculateNextRecursion(vars);
             }
         }
-
-
-        //if(rightSol[index] == null || !rightSol[index].hasNext()) {
-        //    rightSol[index] = env.Query(right[index], vars);
-        //}
-        //Map<String, Term> result = rightSol[index].next();
-        //if(result == null) {
-        //    index--;
-        //    throw new UnificationFailureException();
-        //} else {
-        //    index++;
-        //}
-        //vars.putAll(result);
-        //try {
-        //    index++;
-        //    return calculateNextRecursion(vars);
-        //} catch (UnificationFailureException e) {
-        //    for (String s:
-        //         result.keySet()) {
-        //        vars.remove(s);
-        //    }
-        //    return calculateNextRecursion(vars);
-        //}
     }
 
     /**
