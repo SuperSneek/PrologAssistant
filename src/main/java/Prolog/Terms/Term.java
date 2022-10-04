@@ -58,6 +58,9 @@ public abstract class Term extends PlPattern {
         } else if(atomMatcher.matches()) {
             return new Atom(input);
         } else if(varMatcher.matches()) {
+            if(input.equals("_")) {
+                return new DontCare();
+            }
             return new Variable(input);
         }
         throw new IllegalArgumentException("Not a Term");

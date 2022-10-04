@@ -1,9 +1,6 @@
 package Prolog;
 
-import Prolog.Terms.Atom;
-import Prolog.Terms.Compound;
-import Prolog.Terms.PList;
-import Prolog.Terms.Term;
+import Prolog.Terms.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,6 +43,12 @@ class TermTest {
         HashMap<String, Term> m = new HashMap<>();
         m.put("A", new Atom("dogie"));
         assertTrue(c.substitute(m).equals(new Compound("test", new Term[] {Term.textToTerm("[a.dogie.c]")})));
+    }
+
+    @Test
+    public void TestDontCare() {
+        Term d = Term.textToTerm("_");
+        assertTrue(d instanceof DontCare);
     }
 
     //@Test

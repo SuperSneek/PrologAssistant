@@ -2,6 +2,7 @@ package Prolog.Terms;
 
 import Prolog.Unification.UnificationClauses.SingleClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
+import Prolog.Unification.UnificationFailureException;
 
 import java.util.Map;
 
@@ -17,8 +18,13 @@ public class Atom extends Term {
     }
 
     @Override
-    public UnificationClauseCarrier generateClauses(Term other) {
-        return new SingleClause(this, other);
+    public UnificationClauseCarrier generateClauses(Term other) throws UnificationFailureException {
+        if(other instanceof Atom) {
+            return new SingleClause(this, other);
+        } else {
+            throw new UnificationFailureException();
+        }
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package Prolog.Terms;
 
 
 import Prolog.Unification.UnificationClauses.SingleClause;
+import Prolog.Unification.UnificationClauses.UnificationClause;
 import Prolog.Unification.UnificationClauses.UnificationClauseCarrier;
 import Prolog.Unification.UnificationFailureException;
 

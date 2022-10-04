@@ -1,12 +1,10 @@
 package Prolog.Unification;
 
-import Prolog.Terms.PList;
-import Prolog.Terms.Term;
-import Prolog.Terms.Variable;
+import Prolog.Terms.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
-import Prolog.Terms.Atom;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -31,6 +29,20 @@ class UnifierTest {
         } catch (UnificationFailureException e) {
             fail();
         }
+    }
+
+    @Test
+    void testDontCare() {
+        try {
+            Unifier u = new Unifier(new Atom("test"), new DontCare(), new HashMap<>());
+            assertTrue(u.hasNext());
+            assertEquals(u.next(), mgu);
+            assertFalse(u.hasNext());
+        } catch (UnificationFailureException e) {
+            fail();
+        }
+
+
     }
 
     @Test

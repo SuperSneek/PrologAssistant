@@ -1,0 +1,4 @@
+known(dog,house)
+equal(X,X)
+member(B,[_.B._])
+test:-[member(Y,OUTPUT).equal(Y,dog)]
