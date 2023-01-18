@@ -1,0 +1,3 @@
+member(B,[_.B._])
+known(markus,einkaufen)
+pattern(I,Y):-[member(N,I).known(N,Y)]
